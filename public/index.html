@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="styles.css" />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="./assets/favicon-32x32.png"
+    />
+    <title>Frontend Mentor | Space tourism website</title>
+  </head>
+  <body>
+    <section
+      id="space-section"
+      class="bg-home-mobile md:bg-home-tablet lg:bg-home-desktop bg-cover text-white min-h-screen text-center lg:text-start flex gap-14 flex-col w-full relative"
+    >
+      <header class="flex items-center justify-between h-fit p-6 md:pr-0">
+        <div class="w-[38px]">
+          <img
+            class="w-full h-full"
+            id="logo"
+            src="../assets/shared/logo.svg"
+            alt=""
+          />
+        </div>
+        <div class="w-[38px] md:flex-none md:hidden" id="hamburger ">
+          <img
+            class="w-full h-full"
+            src="../assets/shared/icon-hamburger.svg"
+            alt=""
+          />
+        </div>
+
+        <div
+          id="nav"
+          class="z-20 absolute top-0 right-0 w-[50vw] h-full px-4 pt-4 md:p-0 md:static gap-2 md:items-center md:h-[76px] md:bg-slate-400 md:bg-opacity-25 bg-red-500 flex"
+        >
+          <ul
+            class="text-white list-none flex flex-col md:flex-row gap-4 md:gap-10 w-full text-left h-fit md:h-full md:items-center md:justify-center"
+          >
+            <a href="Homepage" class="active-link nav-link" data-pagename="home"
+              ><li class="cursor-pointer">00 Home</li></a
+            >
+            <a
+              href="Destinationpage"
+              class="nav-link"
+              data-pagename="destination"
+              ><li class="cursor-pointer">01 Destination</li></a
+            >
+            <a href="Crewpage" class="nav-link" data-pagename="crew"
+              ><li class="cursor-pointer">02 Crew</li></a
+            >
+            <a href="Technologypage" class="nav-link" data-pagename="technology"
+              ><li class="cursor-pointer">03 Technology</li></a
+            >
+          </ul>
+          <div class="w-[32px] h-fit md:hidden">
+            <img
+              class="w-full h-full"
+              src="../assets/shared/icon-close.svg"
+              alt=""
+            />
+          </div>
+        </div>
+      </header>
+      <div id="main-container">
+        <main
+          id="main-content"
+          class="lg:flex lg:py-8 lg:px-40 lg:justify-between lg:items-center lg:box-border lg:w-full md:w-[60%] md:mx-auto"
+        >
+          <div class="lg:w-[40vw]">
+            <p class="text-2xl my-4">So, you want to travel to</p>
+            <h1 class="my-8 md:my-0 text-[12vw] border">Space</h1>
+            <p class="text-xl max-w-[90%] md:w-fit lg:mx-0 mx-auto">
+              Let’s face it; if you want to go to space, you might as well
+              genuinely go to outer space and not hover kind of on the edge of
+              it. Well sit back, and relax because we’ll give you a truly out of
+              this world experience!
+            </p>
+          </div>
+          <div class="animate-pulse hover:animate-none">
+            <button
+              id="explore-btn"
+              class="animate-bounce mt-8 bg-white text-blue-950 h-[200px] w-[200px] text-4xl rounded-[50%] hover:animate-none"
+            >
+              Explore
+            </button>
+          </div>
+        </main>
+      </div>
+    </section>
+  </body>
+  <script src="destination.js"></script>
+</html>
