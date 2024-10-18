@@ -5,14 +5,27 @@
   --animation-duration: 0.35s;
 }
 
-.active-link {
-  position: relative;
-  height: 100%;
-  display: flex;
-  /* gap: 4rem; */
-  flex-direction: column;
-  justify-content: center;
-  /* margin-bottom: 2rem; */
+.nav-link {
+  @apply min-h-full flex items-center relative;
+}
+
+.nav-link::after {
+  content: "";
+  background: white;
+  opacity: 0.5;
+  position: absolute;
+  bottom: 0;
+  width: 0%;
+  height: 3px;
+  transition: all 0.25s ease-in-out;
+}
+
+.nav-link:hover::after {
+  height: 3px;
+  width: 100%;
+  content: "";
+  transition: all 0.3s ease-in-out;
+  transition-delay: 0.2s;
 }
 
 .active-link::after {
@@ -23,8 +36,7 @@
   height: 3px;
   position: absolute;
   bottom: 0;
-  border-top-left-radius: 2rem;
-  border-top-right-radius: 2rem;
+  opacity: 1;
 }
 
 #destination-image.animate-spin {
@@ -44,35 +56,35 @@
 /* background image style for other pages except */
 /* destination background */
 .bg-destination-mobile {
-  @apply bg-[url('../assets/destination/background-destination-mobile.jpg')];
+  @apply bg-[url('./assets/destination/background-destination-mobile.jpg')];
 }
 .md\:bg-destination-desktop {
-  @apply bg-[url('../assets/destination/background-destination-tablet.jpg')];
+  @apply bg-[url('./assets/destination/background-destination-tablet.jpg')];
 }
 .lg\:bg-destination-desktop {
-  @apply bg-[url('../assets/destination/background-destination-desktop.jpg')];
+  @apply bg-[url('./assets/destination/background-destination-desktop.jpg')];
 }
 
 /* crew background */
 .bg-crew-mobile {
-  @apply bg-[url('../assets/crew/background-crew-mobile.jpg')];
+  @apply bg-[url('./assets/crew/background-crew-mobile.jpg')];
 }
 .md\:bg-crew-desktop {
-  @apply bg-[url('../assets/crew/background-crew-tablet.jpg')];
+  @apply bg-[url('./assets/crew/background-crew-tablet.jpg')];
 }
 .lg\:bg-crew-desktop {
-  @apply bg-[url('../assets/crew/background-crew-desktop.jpg')];
+  @apply bg-[url('./assets/crew/background-crew-desktop.jpg')];
 }
 
 /* technology background */
 .bg-technology-mobile {
-  @apply bg-[url('../assets/technology/background-technology-mobile.jpg')];
+  @apply bg-[url('./assets/technology/background-technology-mobile.jpg')];
 }
 .md\:bg-technology-desktop {
-  @apply bg-[url('../assets/technology/background-technology-tablet.jpg')];
+  @apply bg-[url('./assets/technology/background-technology-tablet.jpg')];
 }
 .lg\:bg-technology-desktop {
-  @apply bg-[url('../assets/technology/background-technology-desktop.jpg')];
+  @apply bg-[url('./assets/technology/background-technology-desktop.jpg')];
 }
 
 .slide-in_initial {
@@ -115,18 +127,18 @@
 }
 
 .crew-tab-button {
-  @apply opacity-50 cursor-pointer bg-white rounded-full w-4 h-4;
+  @apply opacity-50 cursor-pointer bg-white rounded-full w-4 h-4 md:hover:bg-opacity-40;
 }
 
-.crew-tab-button:nth-child(1) {
-  @apply opacity-100;
+.active-crew-tab {
+  @apply opacity-100 md:hover:bg-opacity-100;
 }
 
 .technology-tab {
-  @apply h-8 w-8 border rounded-full cursor-pointer flex justify-center items-center p-8 text-2xl;
+  @apply h-8 w-8 border rounded-full cursor-pointer flex justify-center items-center p-8 text-2xl md:hover:bg-white md:hover:bg-opacity-30;
 }
 .active-technology__tab {
-  @apply bg-white text-black;
+  @apply bg-white text-black md:hover:bg-opacity-100;
 }
 
 .slide-down {
@@ -140,10 +152,10 @@
   0% {
     transform: translateY(500px);
   }
-  50% {
+  60% {
     transform: translateY(-100px);
   }
-100% {
+  100% {
     transform: translateY(none);
   }
 }

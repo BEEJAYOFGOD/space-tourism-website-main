@@ -3,15 +3,6 @@ let main = document.querySelector("#main-container");
 const homecontent = main.innerHTML;
 const space_section = document.querySelector("#space-section");
 
-let animation_duration = getComputedStyle(document.body).getPropertyValue(
-  "--animation-duration"
-);
-
-animation_duration = animation_duration.split("");
-animation_duration.pop();
-
-let animation_duration_off = parseFloat(animation_duration.join("")) * 1000;
-
 // fetch spave data from "data.json"
 const fetchSpaceData = async () => {
   try {
@@ -87,6 +78,20 @@ const generatePage = (page) => {
 };
 
 fetchSpaceData();
+
+function convertToMilliS(animation_duration) {
+  animation_duration = animation_duration.split("");
+  animation_duration.pop();
+
+  return parseFloat(animation_duration.join("")) * 1000;
+}
+
+// set animation end time
+let animation_duration = getComputedStyle(document.body).getPropertyValue(
+  "--animation-duration"
+);
+
+let animation_duration_off = convertToMilliS(animation_duration);
 
 // // Function to handle destination link clicks and update content
 function handleDestinationClick() {
@@ -167,8 +172,8 @@ function handleCrewClick() {
       let crewMemberIndex = tabBtns.indexOf(tabBtn);
 
       /// start  switch to cicked tab ///
-      tabBtns.forEach((tabBtn) => (tabBtn.style.opacity = "0.5"));
-      tabBtn.style.opacity = "1";
+      tabBtns.forEach((tabBtn) => tabBtn.classList.remove("active-crew-tab"));
+      tabBtn.classList.add("active-crew-tab");
       // end //
 
       crewMemberName.innerHTML = crewData[crewMemberIndex].name;
@@ -217,11 +222,8 @@ function handleTechnlogyClick() {
       technology_image_desktop_container
     ).getPropertyValue("--slide-duration");
 
-    slide_duration = slide_duration.split("");
-    slide_duration.pop();
+    let slide_duration_off = convertToMilliS(slide_duration);
 
-    let slide_duration_off = parseFloat(slide_duration.join("")) * 1000;
-    
     setTimeout(() => {
       technology_image_desktop_container.style.display == "none"
         ? technology_image_mobile_container.classList.remove("slide-down")
@@ -240,8 +242,6 @@ function handleTechnlogyClick() {
         technology_name.innerHTML = technologyData[technologyIndex].name;
         technology_description.innerHTML =
           technologyData[technologyIndex].description;
-
-        // technology_image_desktop_container.classList.add("slide-down");
 
         technology_image_desktop_container.style.display != "none"
           ? technology_image_desktop_container.classList.add("slide-down")
@@ -267,6 +267,7 @@ function handleTechnlogyClick() {
   // Function to fetch HTML content for a specific page asynchronously
 }
 
+// Logic for the navigation links
 let navLinks = Array.from(document.querySelectorAll(".nav-link"));
 let previousPage = "home";
 
@@ -293,6 +294,7 @@ document.querySelector("#main-container").addEventListener("click", (event) => {
 
     destinationLink.classList.add("active-link");
     let page = destinationLink.dataset.pagename;
+
     changePageBackground(page);
     generatePage(destinationLink.dataset.pagename);
   }
