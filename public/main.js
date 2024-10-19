@@ -129,12 +129,14 @@ function handleDestinationClick() {
           "src",
           destinationData[destinationIndex].images.webp
         );
-        destination_image.setAttribute(
-          "alt",
-          `${destinationData[destinationIndex].name} image`
-        );
+
         /////
       });
+
+      destination_image.setAttribute(
+        "alt",
+        `${destinationData[destinationIndex].name} image`
+      );
 
       await imagePromise;
 
@@ -174,17 +176,6 @@ function handleCrewClick() {
       const crewMemberIndex = tabBtns.indexOf(tabBtn);
 
       // Start loading image first
-      const imagePromise = new Promise((resolve) => {
-        crewMemberImg.onload = resolve;
-        crewMemberImg.setAttribute(
-          "src",
-          crewData[crewMemberIndex].images.webp
-        );
-        crewMemberImg.setAttribute(
-          "srt",
-          `image of ${crewData[crewMemberIndex].image}`
-        );
-      });
 
       // Update other content
       tabBtns.forEach((btn) => btn.classList.remove("active-crew-tab"));
@@ -193,6 +184,20 @@ function handleCrewClick() {
       crewMemberName.textContent = crewData[crewMemberIndex].name;
       crewMemberBio.textContent = crewData[crewMemberIndex].bio;
       crewMemberRole.textContent = crewData[crewMemberIndex].role;
+
+      const imagePromise = new Promise((resolve) => {
+        const tempImage = new Image();
+        tempImage.onload = () => {
+          crewMemberImg.setAttribute("src", tempImage.src);
+          resolve();
+        };
+        tempImage.src = crewData[crewMemberIndex].images.webp;
+      });
+
+      crewMemberImg.setAttribute(
+        "srt",
+        `image of ${crewData[crewMemberIndex].image}`
+      );
 
       // Wait for image to load before animation
       await imagePromise;
@@ -258,6 +263,7 @@ function handleTechnlogyClick() {
 
       const imagePromise = new Promise((resolve) => {
         // when the image load is when the chnages are applied
+        technology_image_desktop.onload = resolve;
         technology_image_mobile.onload = resolve;
 
         technology_image_desktop.setAttribute(
