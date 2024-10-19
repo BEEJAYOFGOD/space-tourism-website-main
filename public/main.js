@@ -306,6 +306,6 @@ const changePageBackground = (page) => {
       `md:bg-${previousPage}-tablet`,
       `lg:bg-${previousPage}-desktop`
     );
-    previousPage = page;
   });
+  previousPage = page;
 };
