@@ -160,28 +160,34 @@ function handleCrewClick() {
   setTimeout(() => {
     crewImgContainer.classList.remove("slide-in_from_right");
   }, animation_duration_off);
-
   tabBtns.forEach((tabBtn) => {
-    tabBtn.addEventListener("click", () => {
-      let crewMemberIndex = tabBtns.indexOf(tabBtn);
+    tabBtn.addEventListener("click", async () => {
+      const crewMemberIndex = tabBtns.indexOf(tabBtn);
 
-      /// start  switch to cicked tab ///
-      crewMemberImg.setAttribute("src", crewData[crewMemberIndex].images.webp);
-      tabBtns.forEach((tabBtn) => tabBtn.classList.remove("active-crew-tab"));
+      // Start loading image first
+      const imagePromise = new Promise((resolve) => {
+        crewMemberImg.onload = resolve;
+        crewMemberImg.setAttribute(
+          "src",
+          crewData[crewMemberIndex].images.webp
+        );
+      });
+
+      // Update other content
+      tabBtns.forEach((btn) => btn.classList.remove("active-crew-tab"));
       tabBtn.classList.add("active-crew-tab");
-      // end //
 
-      crewMemberName.innerHTML = crewData[crewMemberIndex].name;
-      crewMemberBio.innerHTML = crewData[crewMemberIndex].bio;
-      crewMemberRole.innerHTML = crewData[crewMemberIndex].role;
+      crewMemberName.textContent = crewData[crewMemberIndex].name;
+      crewMemberBio.textContent = crewData[crewMemberIndex].bio;
+      crewMemberRole.textContent = crewData[crewMemberIndex].role;
+
+      // Wait for image to load before animation
+      await imagePromise;
 
       crewImgContainer.classList.add("slide-in_from_right");
-
       setTimeout(() => {
         crewImgContainer.classList.remove("slide-in_from_right");
       }, animation_duration_off);
-
-      console.log(crewMemberRole);
     });
   });
 }
