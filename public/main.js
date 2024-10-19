@@ -166,6 +166,7 @@ function handleCrewClick() {
       let crewMemberIndex = tabBtns.indexOf(tabBtn);
 
       /// start  switch to cicked tab ///
+      crewMemberImg.setAttribute("src", crewData[crewMemberIndex].images.webp);
       tabBtns.forEach((tabBtn) => tabBtn.classList.remove("active-crew-tab"));
       tabBtn.classList.add("active-crew-tab");
       // end //
@@ -174,15 +175,11 @@ function handleCrewClick() {
       crewMemberBio.innerHTML = crewData[crewMemberIndex].bio;
       crewMemberRole.innerHTML = crewData[crewMemberIndex].role;
 
-      // crewMemberImg.dataset.src = crewData[crewMemberIndex].images.webp;
+      crewImgContainer.classList.add("slide-in_from_right");
 
-      crewMemberImg.setAttribute("src", crewData[crewMemberIndex].images.webp);
-
-      // crewImgContainer.classList.add("slide-in_from_right");
-
-      // setTimeout(() => {
-      //   crewImgContainer.classList.remove("slide-in_from_right");
-      // }, animation_duration_off);
+      setTimeout(() => {
+        crewImgContainer.classList.remove("slide-in_from_right");
+      }, animation_duration_off);
 
       console.log(crewMemberRole);
     });
