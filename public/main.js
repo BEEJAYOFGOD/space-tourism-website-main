@@ -215,53 +215,51 @@ function handleTechnlogyClick() {
 
   // fetch spave data from "data.json"
 
-  fetchSpaceData().then(() => {
-    let technologyData = space_data_results.technology;
+  let technologyData = space_data_results.technology;
 
-    let slide_duration = getComputedStyle(
-      technology_image_desktop_container
-    ).getPropertyValue("--slide-duration");
+  let slide_duration = getComputedStyle(
+    technology_image_desktop_container
+  ).getPropertyValue("--slide-duration");
 
-    let slide_duration_off = convertToMilliS(slide_duration);
+  let slide_duration_off = convertToMilliS(slide_duration);
 
-    setTimeout(() => {
-      technology_image_desktop_container.style.display == "none"
-        ? technology_image_mobile_container.classList.remove("slide-down")
-        : technology_image_desktop_container.classList.remove("slide-down");
-    }, slide_duration_off);
+  setTimeout(() => {
+    technology_image_desktop_container.style.display == "none"
+      ? technology_image_mobile_container.classList.remove("slide-down")
+      : technology_image_desktop_container.classList.remove("slide-down");
+  }, slide_duration_off);
 
-    technology_tabs.forEach((technologyTab) => {
-      let technologyIndex = technology_tabs.indexOf(technologyTab);
+  technology_tabs.forEach((technologyTab) => {
+    let technologyIndex = technology_tabs.indexOf(technologyTab);
 
-      technologyTab.addEventListener("click", () => {
-        technology_tabs.forEach((technologyTab) => {
-          technologyTab.classList.remove("active-technology__tab");
-        });
-        technologyTab.classList.add("active-technology__tab");
-
-        technology_name.innerHTML = technologyData[technologyIndex].name;
-        technology_description.innerHTML =
-          technologyData[technologyIndex].description;
-
-        technology_image_desktop_container.style.display != "none"
-          ? technology_image_desktop_container.classList.add("slide-down")
-          : technology_image_mobile_container.classList.add("slide-down");
-
-        setTimeout(() => {
-          technology_image_desktop_container.style.display == "none"
-            ? technology_image_mobile_container.classList.remove("slide-down")
-            : technology_image_desktop_container.classList.remove("slide-down");
-        }, slide_duration_off);
-
-        technology_image_desktop.setAttribute(
-          "src",
-          technologyData[technologyIndex].images.portrait
-        );
-        technology_image_mobile.setAttribute(
-          "src",
-          technologyData[technologyIndex].images.landscape
-        );
+    technologyTab.addEventListener("click", () => {
+      technology_tabs.forEach((technologyTab) => {
+        technologyTab.classList.remove("active-technology__tab");
       });
+      technologyTab.classList.add("active-technology__tab");
+
+      technology_name.innerHTML = technologyData[technologyIndex].name;
+      technology_description.innerHTML =
+        technologyData[technologyIndex].description;
+
+      technology_image_desktop_container.style.display != "none"
+        ? technology_image_desktop_container.classList.add("slide-down")
+        : technology_image_mobile_container.classList.add("slide-down");
+
+      setTimeout(() => {
+        technology_image_desktop_container.style.display == "none"
+          ? technology_image_mobile_container.classList.remove("slide-down")
+          : technology_image_desktop_container.classList.remove("slide-down");
+      }, slide_duration_off);
+
+      technology_image_desktop.setAttribute(
+        "src",
+        technologyData[technologyIndex].images.portrait
+      );
+      technology_image_mobile.setAttribute(
+        "src",
+        technologyData[technologyIndex].images.landscape
+      );
     });
   });
   // Function to fetch HTML content for a specific page asynchronously
@@ -300,19 +298,38 @@ document.querySelector("#main-container").addEventListener("click", (event) => {
   }
 });
 
+// const changePageBackground = (page) => {
+//   space_section.classList.replace(
+//     `bg-${previousPage}-mobile`,
+//     `bg-${page}-mobile`
+//   );
+//   space_section.classList.replace(
+//     `md:bg-${previousPage}-tablet`,
+//     `md:bg-${page}-tablet`
+//   );
+//   space_section.classList.replace(
+//     `lg:bg-${previousPage}-desktop`,
+//     `lg:bg-${page}-desktop`
+//   );
+
+//   previousPage = page;
+// };
+
 const changePageBackground = (page) => {
-  space_section.classList.replace(
-    `bg-${previousPage}-mobile`,
-    `bg-${page}-mobile`
-  );
-  space_section.classList.replace(
-    `md:bg-${previousPage}-tablet`,
-    `md:bg-${page}-tablet`
-  );
-  space_section.classList.replace(
-    `lg:bg-${previousPage}-desktop`,
+  // Add new classes before removing old ones to prevent flash
+  space_section.classList.add(
+    `bg-${page}-mobile`,
+    `md:bg-${page}-tablet`,
     `lg:bg-${page}-desktop`
   );
 
-  previousPage = page;
+  // Remove old classes in next frame
+  requestAnimationFrame(() => {
+    space_section.classList.remove(
+      `bg-${previousPage}-mobile`,
+      `md:bg-${previousPage}-tablet`,
+      `lg:bg-${previousPage}-desktop`
+    );
+    previousPage = page;
+  });
 };
