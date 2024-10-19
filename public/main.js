@@ -258,7 +258,6 @@ function handleTechnlogyClick() {
 
       const imagePromise = new Promise((resolve) => {
         // when the image load is when the chnages are applied
-        technology_image_desktop.onload = resolve;
         technology_image_mobile.onload = resolve;
 
         technology_image_desktop.setAttribute(
@@ -270,7 +269,6 @@ function handleTechnlogyClick() {
           "src",
           technologyData[technologyIndex].images.landscape
         );
-        
       });
 
       await imagePromise;
