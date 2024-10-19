@@ -173,13 +173,16 @@ function handleCrewClick() {
       crewMemberName.innerHTML = crewData[crewMemberIndex].name;
       crewMemberBio.innerHTML = crewData[crewMemberIndex].bio;
       crewMemberRole.innerHTML = crewData[crewMemberIndex].role;
+
+      // crewMemberImg.dataset.src = crewData[crewMemberIndex].images.webp;
+
       crewMemberImg.setAttribute("src", crewData[crewMemberIndex].images.webp);
 
-      crewImgContainer.classList.add("slide-in_from_right");
+      // crewImgContainer.classList.add("slide-in_from_right");
 
-      setTimeout(() => {
-        crewImgContainer.classList.remove("slide-in_from_right");
-      }, animation_duration_off);
+      // setTimeout(() => {
+      //   crewImgContainer.classList.remove("slide-in_from_right");
+      // }, animation_duration_off);
 
       console.log(crewMemberRole);
     });
