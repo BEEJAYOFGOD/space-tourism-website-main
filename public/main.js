@@ -18,15 +18,17 @@ const fetchSpaceData = async () => {
 };
 
 // Function to fetch HTML content for a specific page asynchronously
+
 const fetchPageHtml = async (page) => {
   try {
     const response = await fetch(`${page}.html`);
+
     if (!response.ok) {
       throw new Error(`Error fetching destination.html: ${response.status}`);
     }
-
     const htmlContent = await response.text();
-    main.innerHTML = htmlContent;
+
+    return htmlContent;
   } catch (error) {
     console.error(`Error fetching ${page}.html:`, error);
     // Handle the error, e.g., display an error message to the user
@@ -40,43 +42,34 @@ const generatePage = (page) => {
 
   switch (page) {
     case "destination":
-      // changePageBackground(page);
-      fetchPageHtml(page)
-        .then(() => {
-          handleDestinationClick();
-        })
-        .catch((error) => {
-          console.error("Error fetching destination.html:", error);
-          // Handle the error, e.g., display an error message to the user
-          main.innerHTML =
-            "An error occurred while fetching the destination content.";
-        });
+      destinationHTML.then((html) => {
+        main.innerHTML = html;
+        handleDestinationClick();
+      });
       break;
     case "crew":
-      fetchPageHtml(page)
-        .then(() => {
-          handleCrewClick();
-        })
-        .catch((error) => {
-          console.error(`Error handling ${page}.html events`, error);
-          // Handle the error, e.g., display an error message to the user
-          main.innerHTML = `An error occurred while fetching the ${page} content.`;
-        });
+      crewHTML.then((html) => {
+        main.innerHTML = html;
+        handleCrewClick();
+      });
       break;
     case "technology":
-      fetchPageHtml(page).then(() => {
+      technologyHTML.then((html) => {
+        main.innerHTML = html;
         handleTechnlogyClick();
       });
       break;
     case "home":
       main.innerHTML = homecontent;
       break;
-
     default:
       return 0;
   }
 };
 
+const destinationHTML = fetchPageHtml("destination");
+const crewHTML = fetchPageHtml("crew");
+const technologyHTML = fetchPageHtml("technology");
 fetchSpaceData();
 
 function convertToMilliS(animation_duration) {
@@ -297,23 +290,6 @@ document.querySelector("#main-container").addEventListener("click", (event) => {
     generatePage(destinationLink.dataset.pagename);
   }
 });
-
-// const changePageBackground = (page) => {
-//   space_section.classList.replace(
-//     `bg-${previousPage}-mobile`,
-//     `bg-${page}-mobile`
-//   );
-//   space_section.classList.replace(
-//     `md:bg-${previousPage}-tablet`,
-//     `md:bg-${page}-tablet`
-//   );
-//   space_section.classList.replace(
-//     `lg:bg-${previousPage}-desktop`,
-//     `lg:bg-${page}-desktop`
-//   );
-
-//   previousPage = page;
-// };
 
 const changePageBackground = (page) => {
   // Add new classes before removing old ones to prevent flash
