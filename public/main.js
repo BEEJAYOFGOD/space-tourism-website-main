@@ -67,9 +67,20 @@ const generatePage = (page) => {
   }
 };
 
-const destinationHTML = fetchPageHtml("destination");
-const crewHTML = fetchPageHtml("crew");
-const technologyHTML = fetchPageHtml("technology");
+let destinationHTML;
+let crewHTML;
+let technologyHTML;
+
+document.addEventListener("DOMContentLoaded", () => {
+  // Fetch HTML content for each page
+  destinationHTML = fetchPageHtml("destination");
+  crewHTML = fetchPageHtml("crew");
+  technologyHTML = fetchPageHtml("technology");
+
+  // Use the fetched HTML content as needed
+  // ...
+});
+
 fetchSpaceData();
 
 function convertToMilliS(animation_duration) {
@@ -306,7 +317,7 @@ const changePageBackground = (page) => {
       `md:bg-${previousPage}-tablet`,
       `lg:bg-${previousPage}-desktop`
     );
-    
+
     previousPage = page;
   });
 };
