@@ -123,14 +123,13 @@ function handleDestinationClick() {
       destination.classList.add("active-link");
 
       const imagePromise = new Promise((resolve) => {
-        //////
-        destination_image.onload = resolve;
-        destination_image.setAttribute(
-          "src",
-          destinationData[destinationIndex].images.webp
-        );
+        const tempImage = new Image();
+        tempImage.onload = () => {
+          destination_image.setAttribute("src", tempImage.src);
+          resolve();
+        };
 
-        /////
+        tempImage.src = destinationData[destinationIndex].images.webp;
       });
 
       destination_image.setAttribute(
@@ -171,6 +170,7 @@ function handleCrewClick() {
   setTimeout(() => {
     crewImgContainer.classList.remove("slide-in_from_right");
   }, animation_duration_off);
+
   tabBtns.forEach((tabBtn) => {
     tabBtn.addEventListener("click", async () => {
       const crewMemberIndex = tabBtns.indexOf(tabBtn);
@@ -261,23 +261,46 @@ function handleTechnlogyClick() {
       technology_description.innerHTML =
         technologyData[technologyIndex].description;
 
-      const imagePromise = new Promise((resolve) => {
-        // when the image load is when the chnages are applied
-        technology_image_desktop.onload = resolve;
-        technology_image_mobile.onload = resolve;
+      const loadImageBasedOnScreenSize = () => {
+        // Create a temporary image object
+        const tempImage = new Image();
 
-        technology_image_desktop.setAttribute(
-          "src",
-          technologyData[technologyIndex].images.portrait
-        );
+        return new Promise((resolve) => {
+          // Function to load the image based on screen size
+          const loadImage = () => {
+            // Check if the screen size matches mobile or desktop
+            const isMobile = window.matchMedia("(max-width: 768px)").matches;
+            const imageSrc = isMobile
+              ? technologyData[technologyIndex].images.landscape
+              : technologyData[technologyIndex].images.portrait;
 
-        technology_image_mobile.setAttribute(
-          "src",
-          technologyData[technologyIndex].images.landscape
-        );
-      });
+            // Set onload handler for the temporary image
+            tempImage.onload = () => {
+              // Set the src attribute of the appropriate image element based on screen size
+              if (isMobile) {
+                technology_image_mobile.setAttribute("src", tempImage.src);
+              } else {
+                technology_image_desktop.setAttribute("src", tempImage.src);
+              }
+              resolve();
+            };
 
-      await imagePromise;
+            // Set the src of the temporary image to start loading
+            tempImage.src = imageSrc;
+          };
+
+          // Load the image initially
+          loadImage();
+
+          // Optional: Add an event listener to reload the image if the screen size changes
+          window.addEventListener("resize", () => {
+            loadImage();
+          });
+        });
+      };
+
+      // Call the function and wait for the image to load
+      await loadImageBasedOnScreenSize();
 
       technology_image_desktop_container.style.display != "none"
         ? technology_image_desktop_container.classList.add("slide-down")
