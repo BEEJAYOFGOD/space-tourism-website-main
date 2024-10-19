@@ -67,19 +67,9 @@ const generatePage = (page) => {
   }
 };
 
-let destinationHTML;
-let crewHTML;
-let technologyHTML;
-
-document.addEventListener("DOMContentLoaded", () => {
-  // Fetch HTML content for each page
-  destinationHTML = fetchPageHtml("destination");
-  crewHTML = fetchPageHtml("crew");
-  technologyHTML = fetchPageHtml("technology");
-
-  // Use the fetched HTML content as needed
-  // ...
-});
+let destinationHTML = fetchPageHtml("destination");
+const crewHTML = fetchPageHtml("crew");
+const technologyHTML = fetchPageHtml("technology");
 
 fetchSpaceData();
 
