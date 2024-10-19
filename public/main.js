@@ -1,8 +1,3 @@
-let space_data_results;
-let main = document.querySelector("#main-container");
-const homecontent = main.innerHTML;
-const space_section = document.querySelector("#space-section");
-
 // fetch spave data from "data.json"
 const fetchSpaceData = async () => {
   try {
@@ -67,18 +62,23 @@ const generatePage = (page) => {
   }
 };
 
-let destinationHTML = fetchPageHtml("destination");
-const crewHTML = fetchPageHtml("crew");
-const technologyHTML = fetchPageHtml("technology");
-
-fetchSpaceData();
-
 function convertToMilliS(animation_duration) {
   animation_duration = animation_duration.split("");
   animation_duration.pop();
 
   return parseFloat(animation_duration.join("")) * 1000;
 }
+
+let space_data_results;
+let main = document.querySelector("#main-container");
+const homecontent = main.innerHTML;
+const space_section = document.querySelector("#space-section");
+
+const destinationHTML = fetchPageHtml("destination");
+const crewHTML = fetchPageHtml("crew");
+const technologyHTML = fetchPageHtml("technology");
+
+fetchSpaceData();
 
 // set animation end time
 let animation_duration = getComputedStyle(document.body).getPropertyValue(
