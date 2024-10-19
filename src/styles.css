@@ -5,6 +5,10 @@
   --animation-duration: 0.35s;
 }
 
+#space-section {
+  transition: all 20s ease-in-out;
+}
+
 .nav-link {
   @apply min-h-full flex items-center relative;
 }

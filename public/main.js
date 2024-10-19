@@ -303,19 +303,19 @@ document.querySelector("#main-container").addEventListener("click", (event) => {
 });
 
 const changePageBackground = (page) => {
-  // Add new classes before removing old ones to prevent flash
-  space_section.classList.add(
-    `bg-${page}-mobile`,
-    `md:bg-${page}-tablet`,
-    `lg:bg-${page}-desktop`
-  );
-
-  // Remove old classes in next frame
+  // Replace old classes using requestAnimationFrame
   requestAnimationFrame(() => {
-    space_section.classList.remove(
+    space_section.classList.replace(
       `bg-${previousPage}-mobile`,
+      `bg-${page}-mobile`
+    );
+    space_section.classList.replace(
       `md:bg-${previousPage}-tablet`,
-      `lg:bg-${previousPage}-desktop`
+      `md:bg-${page}-tablet`
+    );
+    space_section.classList.replace(
+      `lg:bg-${previousPage}-desktop`,
+      `lg:bg-${page}-desktop`
     );
 
     previousPage = page;
