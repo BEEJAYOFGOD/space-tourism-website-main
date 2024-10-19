@@ -74,6 +74,7 @@ let main = document.querySelector("#main-container");
 const homecontent = main.innerHTML;
 const space_section = document.querySelector("#space-section");
 
+/// caching of the destinationHtml to remove redundant fetching
 const destinationHTML = fetchPageHtml("destination");
 const crewHTML = fetchPageHtml("crew");
 const technologyHTML = fetchPageHtml("technology");
@@ -111,7 +112,7 @@ function handleDestinationClick() {
   }, animation_duration_off);
 
   destinationLinks.forEach((destination) => {
-    destination.addEventListener("click", (e) => {
+    destination.addEventListener("click", async (e) => {
       e.preventDefault();
       let destinationIndex = destinationLinks.indexOf(destination);
 
@@ -121,17 +122,25 @@ function handleDestinationClick() {
       });
       destination.classList.add("active-link");
 
-      destination_image.setAttribute(
-        "src",
-        destinationData[destinationIndex].images.webp
-      );
-      destination_image.setAttribute(
-        "alt",
-        `${destinationData[destinationIndex].name} image`
-      );
+      const imagePromise = new Promise((resolve) => {
+        //////
+        destination_image.onload = resolve;
+        destination_image.setAttribute(
+          "src",
+          destinationData[destinationIndex].images.webp
+        );
+        destination_image.setAttribute(
+          "alt",
+          `${destinationData[destinationIndex].name} image`
+        );
+        /////
+      });
+
+      await imagePromise;
 
       // slide in on click fr destination image
       destination_image__container.classList.add("slide-in_onclick");
+
       setTimeout(() => {
         destination_image__container.classList.remove("slide-in_onclick");
       }, animation_duration_off);
@@ -171,6 +180,10 @@ function handleCrewClick() {
           "src",
           crewData[crewMemberIndex].images.webp
         );
+        crewMemberImg.setAttribute(
+          "srt",
+          `image of ${crewData[crewMemberIndex].image}`
+        );
       });
 
       // Update other content
@@ -185,6 +198,7 @@ function handleCrewClick() {
       await imagePromise;
 
       crewImgContainer.classList.add("slide-in_from_right");
+
       setTimeout(() => {
         crewImgContainer.classList.remove("slide-in_from_right");
       }, animation_duration_off);
@@ -232,7 +246,7 @@ function handleTechnlogyClick() {
   technology_tabs.forEach((technologyTab) => {
     let technologyIndex = technology_tabs.indexOf(technologyTab);
 
-    technologyTab.addEventListener("click", () => {
+    technologyTab.addEventListener("click", async () => {
       technology_tabs.forEach((technologyTab) => {
         technologyTab.classList.remove("active-technology__tab");
       });
@@ -241,6 +255,24 @@ function handleTechnlogyClick() {
       technology_name.innerHTML = technologyData[technologyIndex].name;
       technology_description.innerHTML =
         technologyData[technologyIndex].description;
+
+      const imagePromise = new Promise((resolve) => {
+        // when the image load is when the chnages are applied
+        technology_image_desktop.onload = resolve;
+        technology_image_mobile.onload = resolve;
+
+        technology_image_desktop.setAttribute(
+          "src",
+          technologyData[technologyIndex].images.portrait
+        );
+
+        technology_image_mobile.setAttribute(
+          "src",
+          technologyData[technologyIndex].images.landscape
+        );
+      });
+
+      await imagePromise;
 
       technology_image_desktop_container.style.display != "none"
         ? technology_image_desktop_container.classList.add("slide-down")
@@ -251,15 +283,6 @@ function handleTechnlogyClick() {
           ? technology_image_mobile_container.classList.remove("slide-down")
           : technology_image_desktop_container.classList.remove("slide-down");
       }, slide_duration_off);
-
-      technology_image_desktop.setAttribute(
-        "src",
-        technologyData[technologyIndex].images.portrait
-      );
-      technology_image_mobile.setAttribute(
-        "src",
-        technologyData[technologyIndex].images.landscape
-      );
     });
   });
   // Function to fetch HTML content for a specific page asynchronously
