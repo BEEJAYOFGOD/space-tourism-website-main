@@ -262,7 +262,7 @@ function handleTechnlogyClick() {
         technologyData[technologyIndex].description;
 
       const loadImageBasedOnScreenSize = () => {
-        // Create a temporary image object
+        // Create a temporary image obj
         const tempImage = new Image();
 
         return new Promise((resolve) => {
