@@ -270,6 +270,7 @@ function handleTechnlogyClick() {
           "src",
           technologyData[technologyIndex].images.landscape
         );
+        
       });
 
       await imagePromise;
