@@ -1301,6 +1301,11 @@ video {
     padding-top: 0px;
   }
 
+  .md\:text-8xl {
+    font-size: 6rem;
+    line-height: 1;
+  }
+
   .md\:uppercase {
     text-transform: uppercase;
   }
