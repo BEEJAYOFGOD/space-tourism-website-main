@@ -4,18 +4,27 @@
     <p>PICK YOUR DESTINATION</p>
   </div>
 
-  <div class="flex w-full justify-between">
-    <div class="flex-1 slide-in_initial" id="destination-img-container">
+  <div
+    class="flex flex-col lg:flex-row gap-8 lg:w-full lg:justify-between w-[80%] mx-auto lg:mx-0"
+  >
+    <div
+      class="lg:flex-1 slide-in_initial w-full"
+      id="destination-img-container"
+    >
       <img
-        class="cursor-pointer animate-spin"
+        class="cursor-pointer animate-spin mx-auto lg:mx-0"
         id="destination-image"
         src="./assets/destination/image-moon.png"
         alt="moon image"
       />
     </div>
-    <div class="flex-1 text-start slide-in_from_right">
+
+    <div class="flex-1 lg:text-start text-center slide-in_from_right">
       <div class="md:h-[45px] list-container">
-        <ul class="flex gap-6 h-full" id="destination-tabs">
+        <ul
+          class="flex gap-12 h-full lg:justify-normal justify-center md:gap-6"
+          id="destination-tabs"
+        >
           <li>
             <a href="moon" class="destination-links active-link nav-link"
               >MOON</a
@@ -29,7 +38,7 @@
         </ul>
       </div>
 
-      <div class=" ">
+      <div>
         <h2 class="text-8xl m-0 md:uppercase" id="destination-name">MOON</h2>
         <div class="flex justify-between flex-col gap-28">
           <div>
@@ -43,12 +52,12 @@
 
           <div>
             <hr class="w-full" />
-            <div class="flex w-[60%] justify-between mt-8">
-              <div>
+            <div class="flex justify-between mt-8">
+              <div class="text-start">
                 <p>AVG. DISTANCE</p>
                 <p id="destination-distance">384,400 km</p>
               </div>
-              <div>
+              <div class="text-right">
                 <p>EST. TRAVEL TIME</p>
                 <p id="destination-travel">3 days</p>
               </div>

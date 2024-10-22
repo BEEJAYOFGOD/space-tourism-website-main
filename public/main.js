@@ -13,7 +13,6 @@ const fetchSpaceData = async () => {
 };
 
 // Function to fetch HTML content for a specific page asynchronously
-
 const fetchPageHtml = async (page) => {
   try {
     const response = await fetch(`${page}.html`);
@@ -74,7 +73,7 @@ let main = document.querySelector("#main-container");
 const homecontent = main.innerHTML;
 const space_section = document.querySelector("#space-section");
 
-/// caching of the destinationHtml to remove redundant fetching
+/// caching of the destinationHtml to reduce redundant fetching
 const destinationHTML = fetchPageHtml("destination");
 const crewHTML = fetchPageHtml("crew");
 const technologyHTML = fetchPageHtml("technology");
@@ -368,3 +367,17 @@ const changePageBackground = (page) => {
     previousPage = page;
   });
 };
+
+// mobile
+let closeBtn = document.querySelector("#close-button");
+let hamBurger = document.querySelector("#hamburger");
+let navbar = document.querySelector("#nav");
+
+hamBurger.addEventListener("click", () => {
+  navbar.classList.add("slide-in_from_right");
+  navbar.classList.replace("hidden", "flex");
+});
+
+closeBtn.addEventListener("click", () => {
+  navbar.classList.replace("flex", "hidden");
+});
