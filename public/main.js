@@ -36,24 +36,28 @@ const generatePage = (page) => {
 
   switch (page) {
     case "destination":
+      changePageBackground(page);
       destinationHTML.then((html) => {
         main.innerHTML = html;
         handleDestinationClick();
       });
       break;
     case "crew":
+      changePageBackground(page);
       crewHTML.then((html) => {
         main.innerHTML = html;
         handleCrewClick();
       });
       break;
     case "technology":
+      changePageBackground(page);
       technologyHTML.then((html) => {
         main.innerHTML = html;
         handleTechnlogyClick();
       });
       break;
     case "home":
+      changePageBackground(page);
       main.innerHTML = homecontent;
       break;
     default:
@@ -89,6 +93,7 @@ const loadPageFromHash = () => {
         navLink.classList.add("active-link");
       }
     });
+    // changePageBackground(hash);
     generatePage(hash); // Load the page based on hash value
   }
 };
@@ -361,7 +366,7 @@ navLinks.forEach((navLink) => {
 
     history.pushState({ page: pageName }, "", `#${pageName}`);
 
-    changePageBackground(pageName);
+    // changePageBackground(pageName);
     generatePage(pageName);
   });
 });
@@ -377,8 +382,7 @@ document.querySelector("#main-container").addEventListener("click", (event) => {
     destinationLink.classList.add("active-link");
     let page = destinationLink.dataset.pagename;
 
-    changePageBackground(page);
-    generatePage(destinationLink.dataset.pagename);
+    generatePage(page);
   }
 });
 
