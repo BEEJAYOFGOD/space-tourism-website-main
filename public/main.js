@@ -78,9 +78,9 @@ const showSpaceContent = () => {
 };
 
 const loadPageFromHash = () => {
-  main.style.display = "none";
-
+  document.getElementById("loading-screen").style.display = "none";
   showSpaceContent();
+
   const hash = window.location.hash.substring(1); // Removes the '#' from hash
 
   if (!hash) {
@@ -93,16 +93,20 @@ const loadPageFromHash = () => {
         navLink.classList.add("active-link");
       }
     });
-    // changePageBackground(hash);
+
     generatePage(hash); // Load the page based on hash value
   }
+
+  // After generating the page, show the content
 };
+
+let main = document.querySelector("#main-container");
 
 window.addEventListener("hashchange", loadPageFromHash);
 window.addEventListener("load", loadPageFromHash);
 
 let space_data_results;
-let main = document.querySelector("#main-container");
+
 const homecontent = main.innerHTML;
 const space_section = document.querySelector("#space-section");
 
@@ -367,7 +371,9 @@ navLinks.forEach((navLink) => {
     history.pushState({ page: pageName }, "", `#${pageName}`);
 
     // changePageBackground(pageName);
+    document.getElementById("loading-screen").style.display = "block";
     generatePage(pageName);
+    document.getElementById("loading-screen").style.display = "none";
   });
 });
 

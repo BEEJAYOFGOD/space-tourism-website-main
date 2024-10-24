@@ -15,6 +15,11 @@
   </head>
 
   <body class="relative overflow-x-hidden">
+    <div id="loading-screen">
+      <div class="spinner"></div>
+      <p>Loading, please wait...</p>
+    </div>
+
     <section
       id="space-section"
       class="bg-home-mobile md:bg-home-tablet lg:bg-home-desktop bg-cover text-white min-h-screen text-center lg:text-start flex gap-0 flex-col w-full overflow-hidden"
@@ -98,7 +103,7 @@
         >
           <div class="lg:w-[40vw]">
             <p class="text-2xl my-4">So, you want to travel to</p>
-            <h1 class="my-8 md:my-0 text-[12vw] border">Space</h1>
+            <h1 class="my-8 text-8xl md:text-9xl border">Space</h1>
             <p class="text-xl max-w-[90%] md:w-fit lg:mx-0 mx-auto">
               Let’s face it; if you want to go to space, you might as well
               genuinely go to outer space and not hover kind of on the edge of
@@ -106,7 +111,7 @@
               this world experience!
             </p>
           </div>
-          <div class="animate-bounce border mt-20">
+          <div class="animate-bounce mt-20">
             <button
               id="explore-btn"
               class="md:mt-8 bg-white text-blue-950 aspect-[1] lg:w-[13vw] sm:w-[25vw] text-4xl rounded-[50%] animate-pulse p-4"

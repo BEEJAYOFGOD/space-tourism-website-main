@@ -777,6 +777,59 @@ video {
   }
 }
 
+/* Loading Screen Styles */
+
+#loading-screen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #0b0d17;
+  /* Dark background */
+  color: #ffffff;
+  /* White text */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  z-index: 9999;
+  /* Ensure it’s on top of everything */
+  /* display: none; */
+}
+
+/* Spinner (Loading Animation) */
+
+.spinner {
+  width: 50px;
+  height: 50px;
+  border: 5px solid rgba(255, 255, 255, 0.3);
+  border-top: 8px solid #ffffff;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+/* Loading Text Style */
+
+#loading-screen p {
+  margin-top: 10px;
+  font-size: 18px;
+}
+
+/* Keyframes for the spinning animation */
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* Optionally, hide the main container while loading */
+
 .absolute {
   position: absolute;
 }
@@ -1157,8 +1210,9 @@ video {
   line-height: 1;
 }
 
-.text-\[12vw\] {
-  font-size: 12vw;
+.text-8xl {
+  font-size: 6rem;
+  line-height: 1;
 }
 
 .text-sm {
@@ -1213,11 +1267,6 @@ video {
   .md\:mx-auto {
     margin-left: auto;
     margin-right: auto;
-  }
-
-  .md\:my-0 {
-    margin-top: 0px;
-    margin-bottom: 0px;
   }
 
   .md\:mb-0 {
@@ -1316,6 +1365,11 @@ video {
 
   .md\:text-8xl {
     font-size: 6rem;
+    line-height: 1;
+  }
+
+  .md\:text-9xl {
+    font-size: 8rem;
     line-height: 1;
   }
 
