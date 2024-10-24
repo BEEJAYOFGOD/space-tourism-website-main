@@ -61,12 +61,40 @@ const generatePage = (page) => {
   }
 };
 
+// convert the animation from string to milliseconds
 function convertToMilliS(animation_duration) {
   animation_duration = animation_duration.split("");
-  animation_duration.pop();
+  animation_duration.pop(); // removes the "s" in the duration array e.g.[0, . , 4 , s] since s is the last element in unit of time
 
-  return parseFloat(animation_duration.join("")) * 1000;
+  return parseFloat(animation_duration.join("")) * 1000; //this joins the new aray and converts to float
 }
+
+const showSpaceContent = () => {
+  main.style.display = "block"; // Show the content after it's ready
+};
+
+const loadPageFromHash = () => {
+  main.style.display = "none";
+
+  showSpaceContent();
+  const hash = window.location.hash.substring(1); // Removes the '#' from hash
+
+  if (!hash) {
+    generatePage("home"); // Load home if no hash is present
+  } else {
+    navLinks.forEach((navLink) => {
+      navLink.classList.remove("active-link");
+
+      if (navLink.dataset.pagename == hash) {
+        navLink.classList.add("active-link");
+      }
+    });
+    generatePage(hash); // Load the page based on hash value
+  }
+};
+
+window.addEventListener("hashchange", loadPageFromHash);
+window.addEventListener("load", loadPageFromHash);
 
 let space_data_results;
 let main = document.querySelector("#main-container");
@@ -87,7 +115,7 @@ let animation_duration = getComputedStyle(document.body).getPropertyValue(
 
 let animation_duration_off = convertToMilliS(animation_duration);
 
-// // Function to handle destination link clicks and update content
+// Function to handle destination link clicks and update content
 function handleDestinationClick() {
   let destinationLinks = document.querySelectorAll(".destination-links");
   destinationLinks = Array.from(destinationLinks);
@@ -241,8 +269,9 @@ function handleTechnlogyClick() {
 
   let slide_duration_off = convertToMilliS(slide_duration);
 
+  // alert(slide_duration_off);
   setTimeout(() => {
-    technology_image_desktop_container.style.display == "none"
+    window.matchMedia("(max-width: 768px)").matches
       ? technology_image_mobile_container.classList.remove("slide-down")
       : technology_image_desktop_container.classList.remove("slide-down");
   }, slide_duration_off);
@@ -278,9 +307,14 @@ function handleTechnlogyClick() {
               // Set the src attribute of the appropriate image element based on screen size
               if (isMobile) {
                 technology_image_mobile.setAttribute("src", tempImage.src);
+                technology_image_mobile_container.classList.add(
+                  "slide-in_from_right"
+                );
               } else {
                 technology_image_desktop.setAttribute("src", tempImage.src);
+                technology_image_desktop_container.classList.add("slide-down");
               }
+
               resolve();
             };
 
@@ -301,13 +335,11 @@ function handleTechnlogyClick() {
       // Call the function and wait for the image to load
       await loadImageBasedOnScreenSize();
 
-      technology_image_desktop_container.style.display != "none"
-        ? technology_image_desktop_container.classList.add("slide-down")
-        : technology_image_mobile_container.classList.add("slide-down");
-
       setTimeout(() => {
-        technology_image_desktop_container.style.display == "none"
-          ? technology_image_mobile_container.classList.remove("slide-down")
+        window.matchMedia("(max-width: 768px)").matches
+          ? technology_image_mobile_container.classList.remove(
+              "slide-in_from_right"
+            )
           : technology_image_desktop_container.classList.remove("slide-down");
       }, slide_duration_off);
     });
@@ -326,6 +358,8 @@ navLinks.forEach((navLink) => {
     navLink.classList.add("active-link");
 
     const pageName = navLink.dataset.pagename;
+
+    history.pushState({ page: pageName }, "", `#${pageName}`);
 
     changePageBackground(pageName);
     generatePage(pageName);
@@ -380,4 +414,17 @@ hamBurger.addEventListener("click", () => {
 
 closeBtn.addEventListener("click", () => {
   navbar.classList.replace("flex", "hidden");
+});
+
+window.addEventListener("popstate", (e) => {
+  const pageName = e.state ? e.state.page : "home";
+  navLinks.forEach((navLink) => {
+    navLink.classList.remove("active-link");
+
+    if (navLink.dataset.pagename == pageName) {
+      navLink.classList.add("active-link");
+    }
+  });
+
+  generatePage(pageName);
 });
