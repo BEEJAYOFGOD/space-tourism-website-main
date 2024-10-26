@@ -79,7 +79,7 @@ const showSpaceContent = () => {
 };
 
 const loadPageFromHash = () => {
-  document.getElementById("loading-screen").style.display = "none";
+  // document.getElementById("loading-screen").style.display = "none";
   showSpaceContent();
 
   const hash = window.location.hash.substring(1); // Removes the '#' from hash
@@ -395,22 +395,21 @@ document.querySelector("#main-container").addEventListener("click", (event) => {
 
 const changePageBackground = (page) => {
   // Replace old classes using requestAnimationFrame
-  requestAnimationFrame(() => {
-    space_section.classList.replace(
-      `bg-${previousPage}-mobile`,
-      `bg-${page}-mobile`
-    );
-    space_section.classList.replace(
-      `md:bg-${previousPage}-tablet`,
-      `md:bg-${page}-tablet`
-    );
-    space_section.classList.replace(
-      `lg:bg-${previousPage}-desktop`,
-      `lg:bg-${page}-desktop`
-    );
 
-    previousPage = page;
-  });
+  space_section.classList.replace(
+    `bg-${previousPage}-mobile`,
+    `bg-${page}-mobile`
+  );
+  space_section.classList.replace(
+    `md:bg-${previousPage}-tablet`,
+    `md:bg-${page}-tablet`
+  );
+  space_section.classList.replace(
+    `lg:bg-${previousPage}-desktop`,
+    `lg:bg-${page}-desktop`
+  );
+
+  previousPage = page;
 };
 
 // mobile

@@ -790,8 +790,7 @@ video {
   /* Ensures content isn't rendered before JS runs */
 }
 
-/* Loading Screen Styles */
-
+Loading Screen Styles
 #loading-screen {
   position: fixed;
   top: 0;
@@ -1137,10 +1136,6 @@ video {
   border-radius: 50%;
 }
 
-.border{
-  border-width: 1px;
-}
-
 .bg-red-500{
   --tw-bg-opacity: 1;
   background-color: rgb(239 68 68 / var(--tw-bg-opacity));
@@ -1381,18 +1376,6 @@ video {
 
   .md\:min-h-\[76px\]{
     min-height: 76px;
-  }
-
-  .md\:min-h-\[px\]{
-    min-height: px;
-  }
-
-  .md\:min-h-\[100px\]{
-    min-height: 100px;
-  }
-
-  .md\:min-h-\[0px\]{
-    min-height: 0px;
   }
 
   .md\:w-\[60\%\]{
