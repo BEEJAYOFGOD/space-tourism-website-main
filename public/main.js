@@ -78,33 +78,34 @@ const showSpaceContent = () => {
   main.style.visibility = "visible"; // Show the content after it's ready
 };
 
-// const loadPageFromHash = () => {
-//   // document.getElementById("loading-screen").style.display = "none";
-//   showSpaceContent();
+const loadPageFromHash = () => {
+  document.getElementById("loading-screen").style.display = "none";
 
-//   const hash = window.location.hash.substring(1); // Removes the '#' from hash
+  showSpaceContent();
 
-//   if (!hash) {
-//     generatePage("home"); // Load home if no hash is present
-//   } else {
-//     navLinks.forEach((navLink) => {
-//       navLink.classList.remove("active-link");
+  const hash = window.location.hash.substring(1); // Removes the '#' from hash
 
-//       if (navLink.dataset.pagename == hash) {
-//         navLink.classList.add("active-link");
-//       }
-//     });
+  if (!hash) {
+    generatePage("home"); // Load home if no hash is present
+  } else {
+    navLinks.forEach((navLink) => {
+      navLink.classList.remove("active-link");
 
-//     generatePage(hash); // Load the page based on hash value
-//   }
+      if (navLink.dataset.pagename == hash) {
+        navLink.classList.add("active-link");
+      }
+    });
 
-//   // After generating the page, show the content
-// };
+    generatePage(hash); // Load the page based on hash value
+  }
+
+  // After generating the page, show the content
+};
 
 let main = document.querySelector("#main-container");
 
-// window.addEventListener("hashchange", loadPageFromHash);
-// window.addEventListener("load", loadPageFromHash);
+window.addEventListener("hashchange", loadPageFromHash);
+window.addEventListener("load", loadPageFromHash);
 
 let space_data_results;
 
@@ -372,9 +373,9 @@ navLinks.forEach((navLink) => {
     history.pushState({ page: pageName }, "", `#${pageName}`);
 
     // changePageBackground(pageName);
-    document.getElementById("loading-screen").style.display = "block";
+    // document.getElementById("loading-screen").style.display = "block";
     generatePage(pageName);
-    document.getElementById("loading-screen").style.display = "none";
+    // document.getElementById("loading-screen").style.display = "none";
   });
 });
 
@@ -395,21 +396,22 @@ document.querySelector("#main-container").addEventListener("click", (event) => {
 
 const changePageBackground = (page) => {
   // Replace old classes using requestAnimationFrame
+  requestAnimationFrame(() => {
+    space_section.classList.replace(
+      `bg-${previousPage}-mobile`,
+      `bg-${page}-mobile`
+    );
+    space_section.classList.replace(
+      `md:bg-${previousPage}-tablet`,
+      `md:bg-${page}-tablet`
+    );
+    space_section.classList.replace(
+      `lg:bg-${previousPage}-desktop`,
+      `lg:bg-${page}-desktop`
+    );
 
-  space_section.classList.replace(
-    `bg-${previousPage}-mobile`,
-    `bg-${page}-mobile`
-  );
-  space_section.classList.replace(
-    `md:bg-${previousPage}-tablet`,
-    `md:bg-${page}-tablet`
-  );
-  space_section.classList.replace(
-    `lg:bg-${previousPage}-desktop`,
-    `lg:bg-${page}-desktop`
-  );
-
-  previousPage = page;
+    previousPage = page;
+  });
 };
 
 // mobile
@@ -438,3 +440,5 @@ window.addEventListener("popstate", (e) => {
 
   generatePage(pageName);
 });
+
+/// mobile Navigation

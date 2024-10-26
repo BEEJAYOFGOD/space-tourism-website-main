@@ -171,8 +171,7 @@
   visibility: hidden; /* Ensures content isn't rendered before JS runs */
 }
 
-Loading Screen Styles
-#loading-screen {
+Loading Screen Styles #loading-screen {
   position: fixed;
   top: 0;
   left: 0;
