@@ -1007,6 +1007,22 @@ video {
   width: 100%;
 }
 
+.w-\[60\]{
+  width: 60;
+}
+
+.w-\[\]{
+  width: ;
+}
+
+.w-\[70\%\%\]{
+  width: 70%%;
+}
+
+.w-\[70\%\]{
+  width: 70%;
+}
+
 .min-w-full{
   min-width: 100%;
 }
@@ -1579,6 +1595,11 @@ video {
 
   .lg\:w-full{
     width: 100%;
+  }
+
+  .lg\:w-fit{
+    width: -moz-fit-content;
+    width: fit-content;
   }
 
   .lg\:max-w-\[38\%\]{
