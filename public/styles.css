@@ -790,7 +790,7 @@ video {
   /* Ensures content isn't rendered before JS runs */
 }
 
-Loading Screen Styles #loading-screen {
+#loading-screen {
   position: fixed;
   top: 0;
   left: 0;
