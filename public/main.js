@@ -74,7 +74,8 @@ function convertToMilliS(animation_duration) {
 }
 
 const showSpaceContent = () => {
-  main.style.display = "block"; // Show the content after it's ready
+  main.style.display = "block";
+  main.style.visibility = "visible"; // Show the content after it's ready
 };
 
 const loadPageFromHash = () => {
@@ -438,3 +439,54 @@ window.addEventListener("popstate", (e) => {
 
   generatePage(pageName);
 });
+
+/// mobile Navigation
+
+let touchStartX = 0;
+let touchEndX = 0;
+let touchStartY = 0;
+let touchEndY = 0;
+const threshold = 50;
+
+function handleTouchStart(event) {
+  touchStartX = event.changedTouches[0].screenX;
+  touchStartY = event.changedTouches[0].screenY;
+}
+
+function handleTouchMove(event) {
+  // Prevent default scrolling or other touch actions if needed
+  event.preventDefault();
+}
+
+function handleTouchEnd(event) {
+  touchEndX = event.changedTouches[0].screenX;
+  touchEndY = event.changedTouches[0].screenY;
+  handleSwipeGesture();
+}
+
+// Function to detect the swipe direction
+function handleSwipeGesture() {
+  const deltaX = touchEndX - touchStartX;
+  const deltaY = touchEndY - touchStartY;
+
+  // Horizontal swipe detection
+  if (Math.abs(deltaX) > Math.abs(deltaY) && Math.abs(deltaX) > threshold) {
+    if (deltaX > 0) {
+      console.log("Swipe Right");
+    } else {
+      console.log("Swipe Left");
+    }
+  }
+  // Vertical swipe detection
+  else if (Math.abs(deltaY) > threshold) {
+    if (deltaY > 0) {
+      console.log("Swipe Down");
+    } else {
+      console.log("Swipe Up");
+    }
+  }
+}
+
+// Adding event listeners to an element
+
+

@@ -11,6 +11,10 @@ module.exports = {
         "home-tablet": "url('./assets/home/background-home-tablet.jpg')",
         "home-desktop": "url('./assets/home/background-home-desktop.jpg')",
       },
+      fontFamily: {
+        title: "Bellefair",
+        body: "Barlow",
+      },
     },
   },
 };

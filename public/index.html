@@ -14,7 +14,7 @@
     <title>Frontend Mentor | Space tourism website</title>
   </head>
 
-  <body class="relative overflow-x-hidden">
+  <body class="relative overflow-x-hidden font-body">
     <div id="loading-screen">
       <div class="spinner"></div>
       <p>Loading, please wait...</p>
@@ -24,7 +24,9 @@
       id="space-section"
       class="bg-home-mobile md:bg-home-tablet lg:bg-home-desktop bg-cover text-white min-h-screen text-center lg:text-start flex gap-0 flex-col w-full overflow-hidden"
     >
-      <header class="flex items-center justify-between h-fit p-6 md:pr-0">
+      <header
+        class="flex items-center justify-between h-fit p-6 md:pr-0 min-w-full relative lg:items-center"
+      >
         <div class="w-[38px]">
           <img
             class="w-full h-full"
@@ -34,51 +36,53 @@
           />
         </div>
 
-        <div class="w-[38px] md:flex-none md:hidden" id="hamburger">
+        <div class="w-[38px] md:hidden" id="hamburger">
           <img
             class="w-full h-full"
             src="./assets/shared/icon-hamburger.svg"
             alt="hamburger"
           />
         </div>
-
+        <hr
+          class="hidden w-0 lg:inline lg:w-[50vw] lg:z-40 lg:mr-[580px] lg:h-2 lg:opacity-50"
+        />
         <div
           id="nav"
-          class="z-20 absolute top-0 right-0 w-[50vw] h-full px-4 pt-4 md:pt-0 gap-2 md:h-[76px] md:bg-slate-400 backdrop-blur-lg md:bg-opacity-25 md:flex md:items-center hidden md:w-fit"
+          class="z-20 absolute top-0 right-0 w-[50vw] min-h-[100vh] px-4 pt-4 md:pt-0 gap-2 md:min-h-[76px] md:bg-slate-400 backdrop-blur-lg md:bg-opacity-25 md:flex md:items-center hidden md:w-fit lg:px-20"
         >
           <ul
             class="text-white list-none flex flex-col md:flex-row gap-4 md:gap-10 w-full text-left h-fit md:h-full md:items-center md:justify-between"
           >
-            <li class="h-full">
+            <li class="h-full font-light">
               <a
                 href="Homepage"
                 class="active-link nav-link"
                 data-pagename="home"
-              >
-                00 Home
+                ><span class="span-link">00</span>
+                Home
               </a>
             </li>
-            <li class="h-full">
+            <li class="h-full font-light">
               <a
                 href="Destinationpage"
                 class="nav-link"
                 data-pagename="destination"
               >
-                01 Destination
+                <span class="span-link">01</span> Destination
               </a>
             </li>
-            <li class="h-full">
+            <li class="h-full font-light">
               <a href="Crewpage" class="nav-link" data-pagename="crew">
-                02 Crew
+                <span class="span-link">02</span> Crew
               </a>
             </li>
-            <li class="h-full">
+            <li class="h-full font-light">
               <a
                 href="Technologypage"
                 class="nav-link"
                 data-pagename="technology"
               >
-                03 Technology
+                <span class="span-link">03</span> Technology
               </a>
             </li>
           </ul>
@@ -102,8 +106,9 @@
           class="lg:flex lg:mt-12 lg:w-[80%] lg:justify-between lg:items-center lg:box-border md:w-[60%] md:mx-auto"
         >
           <div class="lg:w-[40vw]">
-            <p class="text-2xl my-4">So, you want to travel to</p>
-            <h1 class="my-8 text-8xl md:text-9xl border">Space</h1>
+            <p class="text-2xl my-4">SO, YOU WANT TO TRAVEL TO,</p>
+            <h1 class="my-6 text-8xl md:text-[11vw] font-title">SPACE</h1>
+
             <p class="text-xl max-w-[90%] md:w-fit lg:mx-0 mx-auto">
               Let’s face it; if you want to go to space, you might as well
               genuinely go to outer space and not hover kind of on the edge of
@@ -111,12 +116,12 @@
               this world experience!
             </p>
           </div>
-          <div class="animate-bounce mt-20">
+          <div class="animate-bounce mt-20 font-title">
             <button
               id="explore-btn"
               class="md:mt-8 bg-white text-blue-950 aspect-[1] lg:w-[13vw] sm:w-[25vw] text-4xl rounded-[50%] animate-pulse p-4"
             >
-              Explore
+              EXPLORE
             </button>
           </div>
         </main>
