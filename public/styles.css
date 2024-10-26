@@ -925,6 +925,10 @@ video {
   margin-top: 2rem;
 }
 
+.mb-8{
+  margin-bottom: 2rem;
+}
+
 .box-border{
   box-sizing: border-box;
 }
@@ -1507,6 +1511,14 @@ video {
 
   .lg\:mt-4{
     margin-top: 1rem;
+  }
+
+  .lg\:mb-8{
+    margin-bottom: 2rem;
+  }
+
+  .lg\:mb-0{
+    margin-bottom: 0px;
   }
 
   .lg\:box-border{
