@@ -78,33 +78,33 @@ const showSpaceContent = () => {
   main.style.visibility = "visible"; // Show the content after it's ready
 };
 
-const loadPageFromHash = () => {
-  // document.getElementById("loading-screen").style.display = "none";
-  showSpaceContent();
+// const loadPageFromHash = () => {
+//   // document.getElementById("loading-screen").style.display = "none";
+//   showSpaceContent();
 
-  const hash = window.location.hash.substring(1); // Removes the '#' from hash
+//   const hash = window.location.hash.substring(1); // Removes the '#' from hash
 
-  if (!hash) {
-    generatePage("home"); // Load home if no hash is present
-  } else {
-    navLinks.forEach((navLink) => {
-      navLink.classList.remove("active-link");
+//   if (!hash) {
+//     generatePage("home"); // Load home if no hash is present
+//   } else {
+//     navLinks.forEach((navLink) => {
+//       navLink.classList.remove("active-link");
 
-      if (navLink.dataset.pagename == hash) {
-        navLink.classList.add("active-link");
-      }
-    });
+//       if (navLink.dataset.pagename == hash) {
+//         navLink.classList.add("active-link");
+//       }
+//     });
 
-    generatePage(hash); // Load the page based on hash value
-  }
+//     generatePage(hash); // Load the page based on hash value
+//   }
 
-  // After generating the page, show the content
-};
+//   // After generating the page, show the content
+// };
 
 let main = document.querySelector("#main-container");
 
 // window.addEventListener("hashchange", loadPageFromHash);
-window.addEventListener("load", loadPageFromHash);
+// window.addEventListener("load", loadPageFromHash);
 
 let space_data_results;
 
