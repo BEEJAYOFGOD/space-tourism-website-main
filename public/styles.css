@@ -1383,6 +1383,18 @@ video {
     min-height: 76px;
   }
 
+  .md\:min-h-\[px\]{
+    min-height: px;
+  }
+
+  .md\:min-h-\[100px\]{
+    min-height: 100px;
+  }
+
+  .md\:min-h-\[0px\]{
+    min-height: 0px;
+  }
+
   .md\:w-\[60\%\]{
     width: 60%;
   }

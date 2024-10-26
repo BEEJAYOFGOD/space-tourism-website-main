@@ -103,7 +103,7 @@ const loadPageFromHash = () => {
 
 let main = document.querySelector("#main-container");
 
-window.addEventListener("hashchange", loadPageFromHash);
+// window.addEventListener("hashchange", loadPageFromHash);
 window.addEventListener("load", loadPageFromHash);
 
 let space_data_results;
@@ -488,5 +488,3 @@ function handleSwipeGesture() {
 }
 
 // Adding event listeners to an element
-
-
