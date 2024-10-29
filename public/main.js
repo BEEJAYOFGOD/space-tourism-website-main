@@ -152,7 +152,7 @@ function handleDestinationClick() {
   //  mobile interactions
 
   destination_image__container.addEventListener(
-    "click",
+    "touchstart",
     handleTouchStart,
     false
   );
@@ -470,6 +470,10 @@ window.addEventListener("popstate", (e) => {
 //   { once: true }
 // );
 
+let destination_image__container = document.querySelector(
+  "#destination-img-container"
+);
+
 let touchStartX = 0;
 let touchEndX = 0;
 let touchStartY = 0;
@@ -516,3 +520,19 @@ const handleSwipegesture = () => {
     }
   }
 };
+
+destination_image__container.addEventListener(
+  "touchstart",
+  handleTouchStart,
+  false
+);
+destination_image__container.addEventListener(
+  "touchmove",
+  handleTouchMove,
+  false
+);
+destination_image__container.addEventListener(
+  "touchend",
+  handleTouchEnd,
+  false
+);
