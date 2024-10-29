@@ -152,7 +152,7 @@ function handleDestinationClick() {
   //  mobile interactions
 
   destination_image__container.addEventListener(
-    "touchstart",
+    "click",
     handleTouchStart,
     false
   );
