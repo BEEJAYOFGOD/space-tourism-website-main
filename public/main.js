@@ -156,11 +156,7 @@ function handleDestinationClick() {
     handleTouchStart,
     false
   );
-  // destination_image__container.addEventListener(
-  //   "touchmove",
-  //   handleTouchMove,
-  //   false
-  // );
+
   destination_image__container.addEventListener(
     "touchend",
     (event) => {
@@ -296,9 +292,7 @@ function handleCrewClick() {
 
   // handle mobile touch gesture
   let crewMemberIndex = 0;
-
   crewImgContainer.addEventListener("touchstart", handleTouchStart, false);
-  crewImgContainer.addEventListener("touchmove", handleTouchMove, false);
   crewImgContainer.addEventListener(
     "touchend",
     (event) => {
@@ -448,10 +442,6 @@ function handleTechnlogyClick() {
     "touchstart",
     handleTouchStart,
     false
-  );
-  technology_image_mobile_container.addEventListener(
-    "touchmove",
-    handleTouchMove
   );
 
   technology_image_mobile_container.addEventListener("touchend", (event) => {
@@ -681,11 +671,6 @@ const handleTouchStart = (event) => {
   touchStartX = event.changedTouches[0].screenX;
   touchStartY = event.changedTouches[0].screenY; // Corrected here
 };
-
-function handleTouchMove(event) {
-  // Uncomment the following line only if necessary to prevent scroll
-  event.preventDefault();
-}
 
 const handleTouchEnd = (event) => {
   touchEndX = event.changedTouches[0].screenX;
