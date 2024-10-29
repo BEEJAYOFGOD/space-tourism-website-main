@@ -151,7 +151,6 @@ function handleDestinationClick() {
 
   //  mobile interactions
   let destinationIndex = 0;
-
   destination_image__container.addEventListener(
     "touchstart",
     handleTouchStart,
@@ -171,59 +170,61 @@ function handleDestinationClick() {
         const changeinX = touchEndX - touchStartX;
         const changeinY = touchEndY - touchStartY;
 
-        destinationIndex < destinationLinks.length - 1
-          ? (destinationIndex += 1)
-          : (destinationIndex = 0);
-
+        // horizontal swiping for mobile
         if (
           Math.abs(changeinX) > Math.abs(changeinY) &&
           Math.abs(changeinX) > threshold
         ) {
           if (changeinX > 0) {
-            alert("On path");
-
-            destinationLinks.forEach((link) => {
-              link.classList.remove("active-link");
-            });
-
-            destinationLinks[destinationIndex].classList.add("active-link");
-
-            const imagePromise = new Promise((resolve) => {
-              const tempImage = new Image();
-              tempImage.onload = () => {
-                destination_image.setAttribute("src", tempImage.src);
-                resolve();
-              };
-
-              tempImage.src = destinationData[destinationIndex].images.webp;
-            });
-
-            destination_image.setAttribute(
-              "alt",
-              `${destinationData[destinationIndex].name} image`
-            );
-
-            await imagePromise;
-
-            // slide in on click fr destination image
-            destination_image__container.classList.add("slide-in_onclick");
-
-            setTimeout(() => {
-              destination_image__container.classList.remove("slide-in_onclick");
-            }, animation_duration_off);
-
-            destination_name.textContent =
-              destinationData[destinationIndex].name;
-            destination_description.textContent =
-              destinationData[destinationIndex].description;
-            destination_distance.textContent =
-              destinationData[destinationIndex].distance;
-            destination_travel.textContent =
-              destinationData[destinationIndex].travel;
-            // Rest of the code here
+            destinationIndex < destinationLinks.length - 1
+              ? (destinationIndex += 1)
+              : (destinationIndex = 0);
           } else {
-            alert("Swipe Left");
+            destinationIndex > 0
+              ? (destinationIndex -= 1)
+              : (destinationIndex = destinationLinks.length - 1);
           }
+
+          // run the apply the index specific content
+          destinationLinks.forEach((link) => {
+            link.classList.remove("active-link");
+          });
+
+          destinationLinks[destinationIndex].classList.add("active-link");
+
+          const imagePromise = new Promise((resolve) => {
+            const tempImage = new Image();
+            tempImage.onload = () => {
+              destination_image.setAttribute("src", tempImage.src);
+              resolve();
+            };
+
+            tempImage.src = destinationData[destinationIndex].images.webp;
+          });
+
+          destination_image.setAttribute(
+            "alt",
+            `${destinationData[destinationIndex].name} image`
+          );
+
+          await imagePromise;
+
+          // slide in on click fr destination image
+          destination_image__container.classList.add("slide-in_onclick");
+
+          setTimeout(() => {
+            destination_image__container.classList.remove("slide-in_onclick");
+          }, animation_duration_off);
+
+          destination_name.textContent = destinationData[destinationIndex].name;
+          destination_description.textContent =
+            destinationData[destinationIndex].description;
+          destination_distance.textContent =
+            destinationData[destinationIndex].distance;
+          destination_travel.textContent =
+            destinationData[destinationIndex].travel;
+
+          // end of code
         }
       }
 
@@ -236,7 +237,7 @@ function handleDestinationClick() {
   destinationLinks.forEach((destination) => {
     destination.addEventListener("click", async (e) => {
       e.preventDefault();
-      let destinationIndex = destinationLinks.indexOf(destination);
+      destinationIndex = destinationLinks.indexOf(destination);
 
       // Move to destination link that's clicked and manipulate html content
       destinationLinks.forEach((link) => {
@@ -293,9 +294,76 @@ function handleCrewClick() {
     crewImgContainer.classList.remove("slide-in_from_right");
   }, animation_duration_off);
 
+  // handle mobile touch gesture
+  let crewMemberIndex = 0;
+
+  crewImgContainer.addEventListener("touchstart", handleTouchStart, false);
+  crewImgContainer.addEventListener("touchmove", handleTouchMove, false);
+  crewImgContainer.addEventListener(
+    "touchend",
+    (event) => {
+      handleTouchEnd(event);
+
+      const handleCrewGesture = async () => {
+        const changeinX = touchEndX - touchStartX;
+        const changeinY = touchEndY - touchStartY;
+
+        if (
+          Math.abs(changeinX) > Math.abs(changeinY) &&
+          Math.abs(changeinX) > threshold
+        ) {
+          alert("oyah");
+          if (changeinX > 0) {
+            crewMemberIndex < tabBtns.length - 1
+              ? (crewMemberIndex += 1)
+              : (crewMemberIndex = 0);
+          } else {
+            crewMemberIndex > 0
+              ? (crewMemberIndex -= 1)
+              : (crewMemberIndex = tabBtns.length - 1);
+          }
+        }
+
+        tabBtns.forEach((btn) => btn.classList.remove("active-crew-tab"));
+        tabBtns[crewMemberIndex].classList.add("active-crew-tab");
+
+        crewMemberName.textContent = crewData[crewMemberIndex].name;
+        crewMemberBio.textContent = crewData[crewMemberIndex].bio;
+        crewMemberRole.textContent = crewData[crewMemberIndex].role;
+
+        const imagePromise = new Promise((resolve) => {
+          const tempImage = new Image();
+          tempImage.onload = () => {
+            crewMemberImg.setAttribute("src", tempImage.src);
+            resolve();
+          };
+          tempImage.src = crewData[crewMemberIndex].images.webp;
+        });
+
+        crewMemberImg.setAttribute(
+          "srt",
+          `image of ${crewData[crewMemberIndex].image}`
+        );
+
+        // Wait for image to load before animation
+        await imagePromise;
+
+        crewImgContainer.classList.add("slide-in_from_right");
+
+        setTimeout(() => {
+          crewImgContainer.classList.remove("slide-in_from_right");
+        }, animation_duration_off);
+      };
+
+      handleCrewGesture();
+    },
+    false
+  );
+
+  // Desktop and tab gesture
   tabBtns.forEach((tabBtn) => {
     tabBtn.addEventListener("click", async () => {
-      const crewMemberIndex = tabBtns.indexOf(tabBtn);
+      crewMemberIndex = tabBtns.indexOf(tabBtn);
 
       // Start loading image first
 
@@ -546,29 +614,4 @@ const handleTouchEnd = (event) => {
   touchEndY = event.changedTouches[0].screenY; // Corrected here
 
   // handleSwipegesture();
-};
-
-const handleSwipegesture = () => {
-  const changeinX = touchEndX - touchStartX;
-  const changeinY = touchEndY - touchStartY;
-
-  if (
-    Math.abs(changeinX) > Math.abs(changeinY) &&
-    Math.abs(changeinX) > threshold
-  ) {
-    if (changeinX > 0) {
-      alert("Swipe Right");
-    } else {
-      alert("Swipe Left");
-    }
-  } else if (
-    Math.abs(changeinY) > Math.abs(changeinX) &&
-    Math.abs(changeinY) > threshold
-  ) {
-    if (changeinY > 0) {
-      alert("Swipe Down");
-    } else {
-      alert("Swipe Up");
-    }
-  }
 };
