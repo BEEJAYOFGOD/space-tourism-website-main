@@ -520,19 +520,3 @@ const handleSwipegesture = () => {
     }
   }
 };
-
-destination_image__container.addEventListener(
-  "touchstart",
-  handleTouchStart,
-  false
-);
-destination_image__container.addEventListener(
-  "touchmove",
-  handleTouchMove,
-  false
-);
-destination_image__container.addEventListener(
-  "touchend",
-  handleTouchEnd,
-  false
-);
