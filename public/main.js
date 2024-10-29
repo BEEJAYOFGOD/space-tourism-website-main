@@ -514,6 +514,7 @@ const handleSwipegesture = () => {
 async function handleDestinationGesture() {
   const changeinX = touchEndX - touchStartX;
   const changeinY = touchEndY - touchStartY;
+  let index = 1;
 
   if (
     Math.abs(changeinX) > Math.abs(changeinY) &&
