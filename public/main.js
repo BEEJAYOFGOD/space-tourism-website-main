@@ -163,7 +163,10 @@ function handleDestinationClick() {
   );
   destination_image__container.addEventListener(
     "touchend",
-    handleTouchEnd,
+    () => {
+      handleTouchEnd;
+      handleDestinationGesture;
+    },
     false
   );
 
@@ -460,19 +463,6 @@ window.addEventListener("popstate", (e) => {
   generatePage(pageName);
 });
 
-/// mobile Navigation
-
-// button.addEventListener(
-//   "click",
-//   () => {
-//     console.log("Button clicked");
-//   },
-//   { once: true }
-// );
-// let destination_image__container = document.querySelector(
-//   "#destination-img-container"
-// );
-
 let touchStartX = 0;
 let touchEndX = 0;
 let touchStartY = 0;
@@ -493,7 +483,7 @@ const handleTouchEnd = (event) => {
   touchEndX = event.changedTouches[0].screenX;
   touchEndY = event.changedTouches[0].screenY; // Corrected here
 
-  handleSwipegesture();
+  // handleSwipegesture();
 };
 
 const handleSwipegesture = () => {
@@ -520,3 +510,38 @@ const handleSwipegesture = () => {
     }
   }
 };
+
+async function handleDestinationGesture() {
+  let index = 0;
+
+  destinationLinks.forEach((link) => {
+    link.classList.remove("active-link");
+  });
+  destination.classList.add("active-link");
+
+  const imagePromise = new Promise((resolve) => {
+    const tempImage = new Image();
+    tempImage.onload = () => {
+      destination_image.setAttribute("src", tempImage.src);
+      resolve();
+    };
+
+    tempImage.src = destinationData[index].images.webp;
+  });
+
+  destination_image.setAttribute("alt", `${destinationData[index].name} image`);
+
+  await imagePromise;
+
+  // slide in on click fr destination image
+  destination_image__container.classList.add("slide-in_onclick");
+
+  setTimeout(() => {
+    destination_image__container.classList.remove("slide-in_onclick");
+  }, animation_duration_off);
+
+  destination_name.textContent = destinationData[index].name;
+  destination_description.textContent = destinationData[index].description;
+  destination_distance.textContent = destinationData[index].distance;
+  destination_travel.textContent = destinationData[index].travel;
+}
