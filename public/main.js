@@ -505,7 +505,10 @@ const handleSwipegesture = () => {
     } else {
       alert("Swipe Left");
     }
-  } else if (Math.abs(delta)) {
+  } else if (
+    Math.abs(changeinY) > Math.abs(changeinX) &&
+    Math.abs(changeinY) > threshold
+  ) {
     if (changeinY > 0) {
       alert("swipe down");
     } else {
