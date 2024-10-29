@@ -229,7 +229,7 @@ function handleDestinationClick() {
     false
   );
 
-  // Desktop and tab interactions
+  /// Desktop and tab interactions
   destinationLinks.forEach((destination) => {
     destination.addEventListener("click", async (e) => {
       e.preventDefault();
@@ -690,3 +690,18 @@ const handleTouchEnd = (event) => {
   touchEndX = event.changedTouches[0].screenX;
   touchEndY = event.changedTouches[0].screenY; // Corrected here
 };
+
+let homeBtn = document.querySelector('#homebtn')
+
+
+homeBtn.addEventListener("click", (e) => {
+  e.preventDefault();
+  navLinks.forEach((navLink) => navLink.classList.remove("active-link"));
+  navLinks[0].classList.add("active-link");
+
+  const pageName = navLinks[0].dataset.pagename;
+
+  history.pushState({ page: pageName }, "", `#${pageName}`);
+
+  generatePage(pageName);
+});
