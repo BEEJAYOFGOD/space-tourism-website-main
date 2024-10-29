@@ -482,7 +482,7 @@ const threshold = 50;
 
 const handleTouchStart = (event) => {
   touchStartX = event.changedTouches[0].screenX;
-  touchStartY = event.changedTouches[0].screeeY;
+  touchStartY = event.changedTouches[0].screenY;
 };
 
 function handleTouchMove(event) {
@@ -491,7 +491,7 @@ function handleTouchMove(event) {
 
 const handleTouchEnd = (event) => {
   touchEndX = event.changedTouches[0].screenX;
-  touchEndX = event.changedTouches[0].screenX;
+  touchEndY = event.changedTouches[0].screenX;
 
   handleSwipegesture();
 };
