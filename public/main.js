@@ -164,8 +164,8 @@ function handleDestinationClick() {
   destination_image__container.addEventListener(
     "touchend",
     () => {
-      handleTouchEnd;
-      handleDestinationGesture;
+      handleTouchEnd();
+      handleDestinationGesture();
     },
     false
   );
