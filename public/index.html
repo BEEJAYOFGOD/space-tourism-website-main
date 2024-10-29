@@ -14,7 +14,7 @@
     <title>Frontend Mentor | Space tourism website</title>
   </head>
 
-  <body class="relative overflow-x-hidden font-body">
+  <body class="relative overflow-x-hidden font-body overflow-y-hidden">
     <div id="loading-screen">
       <div class="spinner"></div>
       <p>Loading, please wait...</p>
@@ -47,8 +47,12 @@
           class="hidden w-0 lg:inline lg:w-[50vw] lg:z-40 lg:mr-[580px] lg:h-2 lg:opacity-50"
         />
         <div
+          class="absolute min-w-[50vw] top-0 left-0 bg-black min-h-[150vh] z-[99] opacity-0 md:hidden"
+          id="navbar_ovelay"
+        ></div>
+        <div
           id="nav"
-          class="z-20 absolute top-0 right-0 w-[50vw] min-h-[100vh] px-4 pt-4 md:pt-0 gap-2 md:min-h-[76px] md:bg-slate-400 backdrop-blur-lg md:bg-opacity-25 md:flex md:items-center hidden md:w-fit lg:px-20"
+          class="z-20 absolute top-0 right-0 w-[50vw] min-h-[150vh] px-4 pt-4 md:pt-0 gap-2 md:min-h-[76px] md:bg-slate-400 backdrop-blur-lg md:bg-opacity-25 md:flex md:items-center hidden md:w-fit lg:px-20"
         >
           <ul
             class="text-white list-none flex flex-col md:flex-row gap-4 md:gap-10 w-full text-left h-fit md:min-h-[76px] md:justify-between"

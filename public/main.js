@@ -643,9 +643,16 @@ hamBurger.addEventListener("click", () => {
   navbar.classList.add("slide-in_from_right");
   navbar.classList.replace("hidden", "flex"); // show navabar
 
-  document.body.addEventListener("click", () => {
+  // document.body.addEventListener("click", () => {
+  //   navbar.classList.replace("flex", "hidden");
+  // });
+});
+
+document.querySelector("#navbar_ovelay").addEventListener("click", () => {
+  if (navbar.classList.contains("flex")) {
     navbar.classList.replace("flex", "hidden");
-  });
+  }
+  
 });
 
 closeBtn.addEventListener("click", () => {
