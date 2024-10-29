@@ -312,7 +312,6 @@ function handleCrewClick() {
           Math.abs(changeinX) > Math.abs(changeinY) &&
           Math.abs(changeinX) > threshold
         ) {
-          alert("oyah");
           if (changeinX > 0) {
             crewMemberIndex > 0
               ? (crewMemberIndex -= 1)
@@ -464,7 +463,7 @@ function handleTechnlogyClick() {
         Math.abs(changeinX) > Math.abs(changeinY) &&
         Math.abs(changeinX) > threshold
       ) {
-        alert("oyah");
+    
         if (changeinX > 0) {
           technologyIndex > 0
             ? (technologyIndex -= 1)
