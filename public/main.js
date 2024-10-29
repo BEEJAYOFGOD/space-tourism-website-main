@@ -176,13 +176,13 @@ function handleDestinationClick() {
           Math.abs(changeinX) > threshold
         ) {
           if (changeinX > 0) {
-            destinationIndex < destinationLinks.length - 1
-              ? (destinationIndex += 1)
-              : (destinationIndex = 0);
-          } else {
             destinationIndex > 0
               ? (destinationIndex -= 1)
               : (destinationIndex = destinationLinks.length - 1);
+          } else {
+            destinationIndex < destinationLinks.length - 1
+              ? (destinationIndex += 1)
+              : (destinationIndex = 0);
           }
 
           // run the apply the index specific content
@@ -314,13 +314,13 @@ function handleCrewClick() {
         ) {
           alert("oyah");
           if (changeinX > 0) {
-            crewMemberIndex < tabBtns.length - 1
-              ? (crewMemberIndex += 1)
-              : (crewMemberIndex = 0);
-          } else {
             crewMemberIndex > 0
               ? (crewMemberIndex -= 1)
               : (crewMemberIndex = tabBtns.length - 1);
+          } else {
+            crewMemberIndex < tabBtns.length - 1
+              ? (crewMemberIndex += 1)
+              : (crewMemberIndex = 0);
           }
         }
 
@@ -432,6 +432,8 @@ function handleTechnlogyClick() {
 
   let slide_duration_off = convertToMilliS(slide_duration);
 
+  let technologyIndex = 0;
+
   // alert(slide_duration_off);
   setTimeout(() => {
     window.matchMedia("(max-width: 768px)").matches
@@ -439,10 +441,89 @@ function handleTechnlogyClick() {
       : technology_image_desktop_container.classList.remove("slide-down");
   }, slide_duration_off);
 
-  technology_tabs.forEach((technologyTab) => {
-    let technologyIndex = technology_tabs.indexOf(technologyTab);
+  // technology mobie gesture
 
+  technology_image_mobile_container.addEventListener(
+    "touchstart",
+    handleTouchStart,
+    false
+  );
+  technology_image_mobile_container.addEventListener(
+    "touchmove",
+    handleTouchMove
+  );
+
+  technology_image_mobile_container.addEventListener("touchend", (event) => {
+    handleTouchEnd(event);
+
+    handleTechnologyGesture = async () => {
+      const changeinX = touchEndX - touchStartX;
+      const changeinY = touchEndY - touchStartY;
+
+      if (
+        Math.abs(changeinX) > Math.abs(changeinY) &&
+        Math.abs(changeinX) > threshold
+      ) {
+        alert("oyah");
+        if (changeinX > 0) {
+          technologyIndex > 0
+            ? (technologyIndex -= 1)
+            : (technologyIndex = technology_tabs.length - 1);
+        } else {
+          technologyIndex < technology_tabs.length - 1
+            ? (technologyIndex += 1)
+            : (technologyIndex = 0);
+        }
+      }
+
+      technology_tabs.forEach((technologyTab) => {
+        technologyTab.classList.remove("active-technology__tab");
+      });
+      technology_tabs[technologyIndex].classList.add("active-technology__tab");
+
+      technology_name.textContent = technologyData[technologyIndex].name;
+      technology_description.textContent =
+        technologyData[technologyIndex].description;
+
+      const imagePromise = new Promise((resolve) => {
+        // Create a temporary image obj
+        const tempImage = new Image();
+        const imageSrc = technologyData[technologyIndex].images.landscape;
+
+        // Set onload handler for the temporary image
+        tempImage.onload = () => {
+          // Set the src attribute of the appropriate image element based on screen size
+
+          technology_image_mobile.setAttribute("src", tempImage.src);
+          technology_image_mobile_container.classList.add(
+            "slide-in_from_right"
+          );
+
+          resolve();
+        };
+
+        // Set the src of the temporary image to start loading
+        tempImage.src = imageSrc;
+      });
+
+      // Call the function and wait for the image to load
+      await imagePromise;
+
+      setTimeout(() => {
+        window.matchMedia("(max-width: 768px)").matches
+          ? technology_image_mobile_container.classList.remove(
+              "slide-in_from_right"
+            )
+          : technology_image_desktop_container.classList.remove("slide-down");
+      }, slide_duration_off);
+    };
+
+    handleTechnologyGesture();
+  });
+
+  technology_tabs.forEach((technologyTab) => {
     technologyTab.addEventListener("click", async () => {
+      technologyIndex = technology_tabs.indexOf(technologyTab);
       technology_tabs.forEach((technologyTab) => {
         technologyTab.classList.remove("active-technology__tab");
       });
@@ -507,8 +588,8 @@ function handleTechnlogyClick() {
       }, slide_duration_off);
     });
   });
-  // Function to fetch HTML content for a specific page asynchronously
 }
+// Function to fetch HTML content for a specific page asynchronously
 
 // Logic for the navigation links
 let navLinks = Array.from(document.querySelectorAll(".nav-link"));
@@ -524,10 +605,7 @@ navLinks.forEach((navLink) => {
 
     history.pushState({ page: pageName }, "", `#${pageName}`);
 
-    // changePageBackground(pageName);
-    // document.getElementById("loading-screen").style.display = "block";
     generatePage(pageName);
-    // document.getElementById("loading-screen").style.display = "none";
   });
 });
 
