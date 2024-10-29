@@ -469,9 +469,9 @@ window.addEventListener("popstate", (e) => {
 //   },
 //   { once: true }
 // );
-let destination_image__container = document.querySelector(
-  "#destination-img-container"
-);
+// let destination_image__container = document.querySelector(
+//   "#destination-img-container"
+// );
 
 let touchStartX = 0;
 let touchEndX = 0;
@@ -486,7 +486,7 @@ const handleTouchStart = (event) => {
 
 function handleTouchMove(event) {
   // Uncomment the following line only if necessary to prevent scroll
-  // event.preventDefault();
+  event.preventDefault();
 }
 
 const handleTouchEnd = (event) => {
