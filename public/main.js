@@ -156,11 +156,11 @@ function handleDestinationClick() {
     handleTouchStart,
     false
   );
-  destination_image__container.addEventListener(
-    "touchmove",
-    handleTouchMove,
-    false
-  );
+  // destination_image__container.addEventListener(
+  //   "touchmove",
+  //   handleTouchMove,
+  //   false
+  // );
   destination_image__container.addEventListener(
     "touchend",
     (event) => {
