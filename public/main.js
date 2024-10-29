@@ -511,7 +511,7 @@ const handleSwipegesture = () => {
   }
 };
 
-async function handleDestinationGesture() {
+function handleDestinationGesture() {
   const changeinX = touchEndX - touchStartX;
   const changeinY = touchEndY - touchStartY;
 
