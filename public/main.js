@@ -170,7 +170,10 @@ function handleDestinationClick() {
       async function handleDestinationGesture() {
         const changeinX = touchEndX - touchStartX;
         const changeinY = touchEndY - touchStartY;
-        destinationIndex++;
+
+        destinationIndex < destinationLinks.length - 1
+          ? (destinationIndex += 1)
+          : (destinationIndex = 0);
 
         if (
           Math.abs(changeinX) > Math.abs(changeinY) &&
@@ -182,7 +185,8 @@ function handleDestinationClick() {
             destinationLinks.forEach((link) => {
               link.classList.remove("active-link");
             });
-            destinationLinks[index].classList.add("active-link");
+
+            destinationLinks[destinationIndex].classList.add("active-link");
 
             const imagePromise = new Promise((resolve) => {
               const tempImage = new Image();
@@ -191,12 +195,12 @@ function handleDestinationClick() {
                 resolve();
               };
 
-              tempImage.src = destinationData[index].images.webp;
+              tempImage.src = destinationData[destinationIndex].images.webp;
             });
 
             destination_image.setAttribute(
               "alt",
-              `${destinationData[index].name} image`
+              `${destinationData[destinationIndex].name} image`
             );
 
             await imagePromise;
@@ -208,11 +212,14 @@ function handleDestinationClick() {
               destination_image__container.classList.remove("slide-in_onclick");
             }, animation_duration_off);
 
-            destination_name.textContent = destinationData[index].name;
+            destination_name.textContent =
+              destinationData[destinationIndex].name;
             destination_description.textContent =
-              destinationData[index].description;
-            destination_distance.textContent = destinationData[index].distance;
-            destination_travel.textContent = destinationData[index].travel;
+              destinationData[destinationIndex].description;
+            destination_distance.textContent =
+              destinationData[destinationIndex].distance;
+            destination_travel.textContent =
+              destinationData[destinationIndex].travel;
             // Rest of the code here
           } else {
             alert("Swipe Left");
