@@ -574,9 +574,9 @@ video {
 
 .nav-link::after {
   content: "";
-  background: white;
-  opacity: 0.5;
+  /* background: white; */
   position: absolute;
+  opacity: 0;
   bottom: 0;
   width: 0%;
   height: 3px;
@@ -584,11 +584,18 @@ video {
 }
 
 .nav-link:hover::after {
+  background: white;
   height: 3px;
   width: 100%;
   content: "";
   transition: all 0.3s ease-in-out;
   transition-delay: 0.2s;
+}
+
+@media (min-width: 1024px){
+  .nav-link:hover::after{
+    opacity: 1;
+  }
 }
 
 .active-link::after {
