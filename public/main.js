@@ -641,11 +641,15 @@ let navbar = document.querySelector("#nav");
 
 hamBurger.addEventListener("click", () => {
   navbar.classList.add("slide-in_from_right");
-  navbar.classList.replace("hidden", "flex");
+  navbar.classList.replace("hidden", "flex"); // show navabar
+
+  document.body.addEventListener("click", () => {
+    navbar.classList.replace("flex", "hidden");
+  });
 });
 
 closeBtn.addEventListener("click", () => {
-  navbar.classList.replace("flex", "hidden");
+  navbar.classList.replace("flex", "hidden"); // hide navbar
 });
 
 window.addEventListener("popstate", (e) => {
@@ -661,6 +665,7 @@ window.addEventListener("popstate", (e) => {
   generatePage(pageName);
 });
 
+// for mobile touch
 let touchStartX = 0;
 let touchEndX = 0;
 let touchStartY = 0;
@@ -675,6 +680,4 @@ const handleTouchStart = (event) => {
 const handleTouchEnd = (event) => {
   touchEndX = event.changedTouches[0].screenX;
   touchEndY = event.changedTouches[0].screenY; // Corrected here
-
-  // handleSwipegesture();
 };
