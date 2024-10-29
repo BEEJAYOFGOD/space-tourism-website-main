@@ -511,7 +511,7 @@ const handleSwipegesture = () => {
   }
 };
 
-function handleDestinationGesture() {
+async function handleDestinationGesture() {
   const changeinX = touchEndX - touchStartX;
   const changeinY = touchEndY - touchStartY;
 
@@ -521,63 +521,43 @@ function handleDestinationGesture() {
   ) {
     if (changeinX > 0) {
       alert("On path");
+
+      destinationLinks.forEach((link) => {
+        link.classList.remove("active-link");
+      });
+      destinationLinks[index].classList.add("active-link");
+
+      const imagePromise = new Promise((resolve) => {
+        const tempImage = new Image();
+        tempImage.onload = () => {
+          destination_image.setAttribute("src", tempImage.src);
+          resolve();
+        };
+
+        tempImage.src = destinationData[index].images.webp;
+      });
+
+      destination_image.setAttribute(
+        "alt",
+        `${destinationData[index].name} image`
+      );
+
+      await imagePromise;
+
+      // slide in on click fr destination image
+      destination_image__container.classList.add("slide-in_onclick");
+
+      setTimeout(() => {
+        destination_image__container.classList.remove("slide-in_onclick");
+      }, animation_duration_off);
+
+      destination_name.textContent = destinationData[index].name;
+      destination_description.textContent = destinationData[index].description;
+      destination_distance.textContent = destinationData[index].distance;
+      destination_travel.textContent = destinationData[index].travel;
       // Rest of the code here
     } else {
       alert("Swipe Left");
     }
   }
-
-  // if (
-  //   Math.abs(changeinX) > Math.abs(changeinY) &&
-  //   Math.abs(changeinX) > threshold
-  // )
-  //   if (changeinX > 0) {
-  //     alert("On path");
-  //     //     destinationLinks.forEach((link) => {
-  //     //       link.classList.remove("active-link");
-  //     //     });
-  //     //     destinationLinks[index].classList.add("active-link");
-
-  //     //     const imagePromise = new Promise((resolve) => {
-  //     //       const tempImage = new Image();
-  //     //       tempImage.onload = () => {
-  //     //         destination_image.setAttribute("src", tempImage.src);
-  //     //         resolve();
-  //     //       };
-
-  //     //       tempImage.src = destinationData[index].images.webp;
-  //     //     });
-
-  //     //     destination_image.setAttribute(
-  //     //       "alt",
-  //     //       `${destinationData[index].name} image`
-  //     //     );
-
-  //     //     await imagePromise;
-
-  //     //     // slide in on click fr destination image
-  //     //     destination_image__container.classList.add("slide-in_onclick");
-
-  //     //     setTimeout(() => {
-  //     //       destination_image__container.classList.remove("slide-in_onclick");
-  //     //     }, animation_duration_off);
-
-  //     //     destination_name.textContent = destinationData[index].name;
-  //     //     destination_description.textContent = destinationData[index].description;
-  //     //     destination_distance.textContent = destinationData[index].distance;
-  //     //     destination_travel.textContent = destinationData[index].travel;
-  //     //   } else {
-  //     //     alert("Swipe Left");
-  //     //   }
-  //     // } else if (
-  //     //   Math.abs(changeinY) > Math.abs(changeinX) &&
-  //     //   Math.abs(changeinY) > threshold
-  //     // ) {
-  //     //   if (changeinY > 0) {
-  //     //     alert("Swipe Down");
-  //     //   } else {
-  //     //     alert("Swipe Up");
-  //     //   }
-  //     // }
-  //   }
 }
