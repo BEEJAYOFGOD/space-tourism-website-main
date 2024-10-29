@@ -149,6 +149,25 @@ function handleDestinationClick() {
     destination_image__container.classList.remove("slide-in_initial");
   }, animation_duration_off);
 
+  //  mobile interactions
+
+  destination_image__container.addEventListener(
+    "touchstart",
+    handleTouchStart,
+    false
+  );
+  destination_image__container.addEventListener(
+    "touchmove",
+    handleTouchMove,
+    false
+  );
+  destination_image__container.addEventListener(
+    "touchend",
+    handleTouchEnd,
+    false
+  );
+
+  // Desktop and tab interactions
   destinationLinks.forEach((destination) => {
     destination.addEventListener("click", async (e) => {
       e.preventDefault();
@@ -442,3 +461,55 @@ window.addEventListener("popstate", (e) => {
 });
 
 /// mobile Navigation
+
+// button.addEventListener(
+//   "click",
+//   () => {
+//     console.log("Button clicked");
+//   },
+//   { once: true }
+// );
+
+let touchStartX = 0;
+let touchEndX = 0;
+let touchStartY = 0;
+let touchEndY = 0;
+const threshold = 50;
+
+const handleTouchStart = (event) => {
+  touchStartX = event.changedTouches[0].screenX;
+  touchStartY = event.changedTouches[0].screeeY;
+};
+
+function handleTouchMove(event) {
+  event.preventDefault();
+}
+
+const handleTouchEnd = (event) => {
+  touchEndX = event.changedTouches[0].screenX;
+  touchEndX = event.changedTouches[0].screenX;
+
+  handleSwipegesture();
+};
+
+const handleSwipegesture = () => {
+  const changeinX = touchEndX - touchStartX;
+  const changeinY = touchEndY - touchStartY;
+
+  if (
+    Math.abs(changeinX) > Math.abs(changeinY) &&
+    Math.abs(changeinX) > threshold
+  ) {
+    if (changeinX > 0) {
+      alert("Swipe Right");
+    } else {
+      alert("Swipe Left");
+    }
+  } else if (Math.abs(delta)) {
+    if (changeinY > 0) {
+      alert("swipe down");
+    } else {
+      alert("Swipe Up");
+    }
+  }
+};
