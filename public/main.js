@@ -312,6 +312,12 @@ function handleCrewClick() {
           Math.abs(changeinX) > Math.abs(changeinY) &&
           Math.abs(changeinX) > threshold
         ) {
+          crewImgContainer.classList.add("slide-in_from_right");
+
+          setTimeout(() => {
+            crewImgContainer.classList.remove("slide-in_from_right");
+          }, animation_duration_off);
+
           if (changeinX > 0) {
             crewMemberIndex > 0
               ? (crewMemberIndex -= 1)
@@ -346,12 +352,6 @@ function handleCrewClick() {
 
         // Wait for image to load before animation
         await imagePromise;
-
-        crewImgContainer.classList.add("slide-in_from_right");
-
-        setTimeout(() => {
-          crewImgContainer.classList.remove("slide-in_from_right");
-        }, animation_duration_off);
       };
 
       handleCrewGesture();
@@ -463,7 +463,6 @@ function handleTechnlogyClick() {
         Math.abs(changeinX) > Math.abs(changeinY) &&
         Math.abs(changeinX) > threshold
       ) {
-    
         if (changeinX > 0) {
           technologyIndex > 0
             ? (technologyIndex -= 1)
