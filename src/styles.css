@@ -171,7 +171,7 @@
   visibility: hidden; /* Ensures content isn't rendered before JS runs */
 }
 
- #loading-screen {
+#loading-screen {
   position: fixed;
   top: 0;
   left: 0;
@@ -203,6 +203,26 @@
   font-size: 18px;
 }
 
+#navbar_ovelay {
+  opacity: 0;
+}
+
+.fade-in {
+  animation-name: fade-in;
+  animation-timing-function: ease-in-out;
+  animation-duration: var(--animation-duration);
+  animation-fill-mode: both;
+  animation-delay: 0.3s;
+}
+
+@keyframes fade-in {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 0.3;
+  }
+}
 /* Keyframes for the spinning animation */
 @keyframes spin {
   0% {

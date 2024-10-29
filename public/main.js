@@ -645,9 +645,7 @@ hamBurger.addEventListener("click", () => {
   navbar.classList.replace("hidden", "flex"); // show navabar
   navOverlay.classList.replace("hidden", "flex");
 
-  // document.body.addEventListener("click", () => {
-  //   navbar.classList.replace("flex", "hidden");
-  // });
+  navOverlay.classList.add("fade-in");
 });
 
 navOverlay.addEventListener("click", () => {
@@ -659,8 +657,10 @@ navOverlay.addEventListener("click", () => {
 
 closeBtn.addEventListener("click", () => {
   navbar.classList.replace("flex", "hidden"); // hide navbar
+  navOverlay.classList.replace("flex", "hidden");
 });
 
+// forward and backward navigation
 window.addEventListener("popstate", (e) => {
   const pageName = e.state ? e.state.page : "home";
   navLinks.forEach((navLink) => {
@@ -691,11 +691,9 @@ const handleTouchEnd = (event) => {
   touchEndY = event.changedTouches[0].screenY; // Corrected here
 };
 
-let homeBtn = document.querySelector('#homebtn')
+let homeBtn = document.querySelector("#homebtn");
 
-
-homeBtn.addEventListener("click", (e) => {
-  e.preventDefault();
+homeBtn.addEventListener("click", () => {
   navLinks.forEach((navLink) => navLink.classList.remove("active-link"));
   navLinks[0].classList.add("active-link");
 
