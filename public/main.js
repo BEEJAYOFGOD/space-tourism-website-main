@@ -239,7 +239,7 @@ function handleDestinationClick() {
       destinationLinks.forEach((link) => {
         link.classList.remove("active-link");
       });
-      destination.classList.add("active-link");
+      destinationLinks[destinationIndex].classList.add("active-link");
 
       const imagePromise = new Promise((resolve) => {
         const tempImage = new Image();
