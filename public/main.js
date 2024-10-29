@@ -638,21 +638,23 @@ const changePageBackground = (page) => {
 let closeBtn = document.querySelector("#close-button");
 let hamBurger = document.querySelector("#hamburger");
 let navbar = document.querySelector("#nav");
+let navOverlay = document.querySelector("#navbar_ovelay");
 
 hamBurger.addEventListener("click", () => {
   navbar.classList.add("slide-in_from_right");
   navbar.classList.replace("hidden", "flex"); // show navabar
+  navOverlay.classList.replace("hidden", "flex");
 
   // document.body.addEventListener("click", () => {
   //   navbar.classList.replace("flex", "hidden");
   // });
 });
 
-document.querySelector("#navbar_ovelay").addEventListener("click", () => {
+navOverlay.addEventListener("click", () => {
   if (navbar.classList.contains("flex")) {
+    navOverlay.classList.replace("flex", "hidden");
     navbar.classList.replace("flex", "hidden");
   }
-  
 });
 
 closeBtn.addEventListener("click", () => {
