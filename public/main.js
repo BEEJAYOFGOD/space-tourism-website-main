@@ -469,7 +469,6 @@ window.addEventListener("popstate", (e) => {
 //   },
 //   { once: true }
 // );
-
 let destination_image__container = document.querySelector(
   "#destination-img-container"
 );
@@ -482,16 +481,17 @@ const threshold = 50;
 
 const handleTouchStart = (event) => {
   touchStartX = event.changedTouches[0].screenX;
-  touchStartY = event.changedTouches[0].screenY;
+  touchStartY = event.changedTouches[0].screenY; // Corrected here
 };
 
 function handleTouchMove(event) {
-  event.preventDefault();
+  // Uncomment the following line only if necessary to prevent scroll
+  // event.preventDefault();
 }
 
 const handleTouchEnd = (event) => {
   touchEndX = event.changedTouches[0].screenX;
-  touchEndY = event.changedTouches[0].screenX;
+  touchEndY = event.changedTouches[0].screenY; // Corrected here
 
   handleSwipegesture();
 };
@@ -514,7 +514,7 @@ const handleSwipegesture = () => {
     Math.abs(changeinY) > threshold
   ) {
     if (changeinY > 0) {
-      alert("swipe down");
+      alert("Swipe Down");
     } else {
       alert("Swipe Up");
     }
