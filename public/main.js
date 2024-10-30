@@ -117,6 +117,19 @@ const destinationHTML = fetchPageHtml("destination");
 const crewHTML = fetchPageHtml("crew");
 const technologyHTML = fetchPageHtml("technology");
 
+// for mobile touch
+let touchStartX = 0;
+let touchEndX = 0;
+const threshold = 50;
+
+const handleTouchStart = (event) => {
+  touchStartX = event.changedTouches[0].screenX;
+};
+
+const handleTouchEnd = (event) => {
+  touchEndX = event.changedTouches[0].screenX;
+};
+
 fetchSpaceData();
 
 // set animation end time
@@ -164,7 +177,6 @@ function handleDestinationClick() {
 
       async function handleDestinationGesture() {
         const changeinX = touchEndX - touchStartX;
-        const changeinY = touchEndY - touchStartY;
 
         // horizontal swiping for mobile
 
@@ -650,20 +662,32 @@ hamBurger.addEventListener("click", () => {
   navbar.classList.add("slide-in_from_right");
   navbar.classList.replace("hidden", "flex"); // show navabar
   navOverlay.classList.replace("hidden", "flex");
-
   navOverlay.classList.add("fade-in");
 });
 
 navOverlay.addEventListener("click", () => {
   if (navbar.classList.contains("flex")) {
     navOverlay.classList.replace("flex", "hidden");
-    navbar.classList.replace("flex", "hidden");
+    navbar.classList.remove("slide-in_from_right");
+    navbar.classList.add("slide-out");
+
+    setTimeout(() => {
+      navbar.classList.remove("slide-out");
+      navbar.classList.remove("slide-in_from_right");
+      navbar.classList.replace("flex", "hidden");
+    }, animation_duration_off / 2);
   }
 });
 
 closeBtn.addEventListener("click", () => {
-  navbar.classList.replace("flex", "hidden"); // hide navbar
+  // hide navbar
+  navbar.classList.add("slide-out");
   navOverlay.classList.replace("flex", "hidden");
+
+  setTimeout(() => {
+    navbar.classList.remove("slide-out");
+    navbar.classList.replace("flex", "hidden");
+  }, animation_duration_off / 2);
 });
 
 // forward and backward navigation
@@ -679,23 +703,6 @@ window.addEventListener("popstate", (e) => {
 
   generatePage(pageName);
 });
-
-// for mobile touch
-let touchStartX = 0;
-let touchEndX = 0;
-let touchStartY = 0;
-let touchEndY = 0;
-const threshold = 50;
-
-const handleTouchStart = (event) => {
-  touchStartX = event.changedTouches[0].screenX;
-  touchStartY = event.changedTouches[0].screenY; // Corrected here
-};
-
-const handleTouchEnd = (event) => {
-  touchEndX = event.changedTouches[0].screenX;
-  touchEndY = event.changedTouches[0].screenY; // Corrected here
-};
 
 let homeBtn = document.querySelector("#homebtn");
 

@@ -846,6 +846,23 @@ video {
   animation-delay: 0.35s;
 }
 
+.slide-out {
+  animation-name: slide-out;
+  animation-timing-function: ease-in-out;
+  animation-fill-mode: both;
+  animation-duration: var(--animation-duration);
+}
+
+@keyframes slide-out {
+  0% {
+    transform: translateX(none);
+  }
+
+  80% {
+    transform: translateX(300px);
+  }
+}
+
 @keyframes fade-in {
   0% {
     opacity: 0;
