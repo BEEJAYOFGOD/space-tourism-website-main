@@ -167,61 +167,68 @@ function handleDestinationClick() {
         const changeinY = touchEndY - touchStartY;
 
         // horizontal swiping for mobile
-        if (
-          Math.abs(changeinX) > Math.abs(changeinY) &&
-          Math.abs(changeinX) > threshold
-        ) {
-          if (changeinX > 0) {
-            destinationIndex > 0
-              ? (destinationIndex -= 1)
-              : (destinationIndex = destinationLinks.length - 1);
-          } else {
-            destinationIndex < destinationLinks.length - 1
-              ? (destinationIndex += 1)
-              : (destinationIndex = 0);
-          }
 
-          // run the apply the index specific content
-          destinationLinks.forEach((link) => {
-            link.classList.remove("active-link");
-          });
+        if (changeinX > 0 && Math.abs(changeinX) > threshold) {
+          destinationIndex > 0
+            ? (destinationIndex -= 1)
+            : (destinationIndex = destinationLinks.length - 1);
+        } else if (changeinX < 0 && Math.abs(changeinX) > threshold) {
+          destinationIndex < destinationLinks.length - 1
+            ? (destinationIndex += 1)
+            : (destinationIndex = 0);
+        }
 
-          destinationLinks[destinationIndex].classList.add("active-link");
+        // run the apply the index specific content
+        destinationLinks.forEach((link) => {
+          link.classList.remove("active-link");
+        });
 
-          const imagePromise = new Promise((resolve) => {
-            const tempImage = new Image();
-            tempImage.onload = () => {
-              destination_image.setAttribute("src", tempImage.src);
-              resolve();
-            };
+        destinationLinks[destinationIndex].classList.add("active-link");
 
-            tempImage.src = destinationData[destinationIndex].images.webp;
-          });
+        const imagePromise = new Promise((resolve) => {
+          const tempImage = new Image();
+          tempImage.onload = () => {
+            destination_image.setAttribute("src", tempImage.src);
+            resolve();
+          };
 
-          destination_image.setAttribute(
-            "alt",
-            `${destinationData[destinationIndex].name} image`
-          );
+          tempImage.src = destinationData[destinationIndex].images.webp;
+        });
 
-          await imagePromise;
+        destination_image.setAttribute(
+          "alt",
+          `${destinationData[destinationIndex].name} image`
+        );
 
-          // slide in on click fr destination image
-          destination_image__container.classList.add("slide-in_onclick");
+        await imagePromise;
+
+        // slide in on click fr destination image
+        if (changeinX > 0 && Math.abs(changeinX) > threshold) {
+          destination_image__container.classList.add("slide-in_initial");
 
           setTimeout(() => {
-            destination_image__container.classList.remove("slide-in_onclick");
+            destination_image__container.classList.remove("slide-in_initial");
           }, animation_duration_off);
+        } else if (changeinX < 0 && Math.abs(changeinX) > threshold) {
+          destination_image__container.classList.add("slide-in_from_right");
 
-          destination_name.textContent = destinationData[destinationIndex].name;
-          destination_description.textContent =
-            destinationData[destinationIndex].description;
-          destination_distance.textContent =
-            destinationData[destinationIndex].distance;
-          destination_travel.textContent =
-            destinationData[destinationIndex].travel;
-
-          // end of code
+          setTimeout(() => {
+            destination_image__container.classList.remove(
+              "slide-in_from_right"
+            );
+          }, animation_duration_off);
         }
+
+        // apply dynamic content
+        destination_name.textContent = destinationData[destinationIndex].name;
+        destination_description.textContent =
+          destinationData[destinationIndex].description;
+        destination_distance.textContent =
+          destinationData[destinationIndex].distance;
+        destination_travel.textContent =
+          destinationData[destinationIndex].travel;
+
+        // end of code
       }
 
       handleDestinationGesture();
@@ -300,21 +307,15 @@ function handleCrewClick() {
 
       const handleCrewGesture = async () => {
         const changeinX = touchEndX - touchStartX;
-        const changeinY = touchEndY - touchStartY;
 
-        if (
-          Math.abs(changeinX) > Math.abs(changeinY) &&
-          Math.abs(changeinX) > threshold
-        ) {
-          if (changeinX > 0) {
-            crewMemberIndex > 0
-              ? (crewMemberIndex -= 1)
-              : (crewMemberIndex = tabBtns.length - 1);
-          } else {
-            crewMemberIndex < tabBtns.length - 1
-              ? (crewMemberIndex += 1)
-              : (crewMemberIndex = 0);
-          }
+        if (changeinX > 0 && Math.abs(changeinX) > threshold) {
+          crewMemberIndex > 0
+            ? (crewMemberIndex -= 1)
+            : (crewMemberIndex = tabBtns.length - 1);
+        } else if (changeinX < 0 && Math.abs(changeinX) > threshold) {
+          crewMemberIndex < tabBtns.length - 1
+            ? (crewMemberIndex += 1)
+            : (crewMemberIndex = 0);
         }
 
         tabBtns.forEach((btn) => btn.classList.remove("active-crew-tab"));
@@ -341,7 +342,13 @@ function handleCrewClick() {
         // Wait for image to load before animation
         await imagePromise;
 
-        if (Math.abs(changeinX) > threshold) {
+        if (changeinX > 0 && Math.abs(changeinX) > threshold) {
+          crewImgContainer.classList.add("slide-in_initial");
+
+          setTimeout(() => {
+            crewImgContainer.classList.remove("slide-in_initial");
+          }, animation_duration_off);
+        } else if (changeinX < 0 && Math.abs(changeinX) > threshold) {
           crewImgContainer.classList.add("slide-in_from_right");
 
           setTimeout(() => {
@@ -449,21 +456,15 @@ function handleTechnlogyClick() {
 
     handleTechnologyGesture = async () => {
       const changeinX = touchEndX - touchStartX;
-      const changeinY = touchEndY - touchStartY;
 
-      if (
-        Math.abs(changeinX) > Math.abs(changeinY) &&
-        Math.abs(changeinX) > threshold
-      ) {
-        if (changeinX > 0) {
-          technologyIndex > 0
-            ? (technologyIndex -= 1)
-            : (technologyIndex = technology_tabs.length - 1);
-        } else {
-          technologyIndex < technology_tabs.length - 1
-            ? (technologyIndex += 1)
-            : (technologyIndex = 0);
-        }
+      if (changeinX > 0 && Math.abs(changeinX) > threshold) {
+        technologyIndex > 0
+          ? (technologyIndex -= 1)
+          : (technologyIndex = technology_tabs.length - 1);
+      } else if (changeinX < 0 && Math.abs(changeinX) > threshold) {
+        technologyIndex < technology_tabs.length - 1
+          ? (technologyIndex += 1)
+          : (technologyIndex = 0);
       }
 
       technology_tabs.forEach((technologyTab) => {
@@ -483,12 +484,7 @@ function handleTechnlogyClick() {
         // Set onload handler for the temporary image
         tempImage.onload = () => {
           // Set the src attribute of the appropriate image element based on screen size
-
           technology_image_mobile.setAttribute("src", tempImage.src);
-          technology_image_mobile_container.classList.add(
-            "slide-in_from_right"
-          );
-
           resolve();
         };
 
@@ -499,13 +495,23 @@ function handleTechnlogyClick() {
       // Call the function and wait for the image to load
       await imagePromise;
 
-      setTimeout(() => {
-        window.matchMedia("(max-width: 768px)").matches
-          ? technology_image_mobile_container.classList.remove(
-              "slide-in_from_right"
-            )
-          : technology_image_desktop_container.classList.remove("slide-down");
-      }, slide_duration_off);
+      if (changeinX > 0 && Math.abs(changeinX) > threshold) {
+        technology_image_mobile_container.classList.add("slide-in_initial");
+
+        setTimeout(() => {
+          technology_image_mobile_container.classList.remove(
+            "slide-in_initial"
+          );
+        }, animation_duration_off);
+      } else if (changeinX < 0 && Math.abs(changeinX) > threshold) {
+        technology_image_mobile_container.classList.add("slide-in_from_right");
+
+        setTimeout(() => {
+          technology_image_mobile_container.classList.remove(
+            "slide-in_from_right"
+          );
+        }, animation_duration_off);
+      }
     };
 
     handleTechnologyGesture();

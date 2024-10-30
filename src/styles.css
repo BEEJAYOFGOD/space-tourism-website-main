@@ -214,7 +214,7 @@
   animation-timing-function: ease-in-out;
   animation-duration: var(--animation-duration);
   animation-fill-mode: both;
-  animation-delay: 0.3s;
+  animation-delay: 0.35s;
 }
 
 @keyframes fade-in {
@@ -222,7 +222,7 @@
     opacity: 0;
   }
   100% {
-    opacity: 0.3;
+    opacity: 0.4;
   }
 }
 /* Keyframes for the spinning animation */
