@@ -1065,6 +1065,14 @@ video {
   width: 100%;
 }
 
+.w-\[30px\]{
+  width: 30px;
+}
+
+.w-\[35px\]{
+  width: 35px;
+}
+
 .min-w-\[50vw\]{
   min-width: 50vw;
 }
@@ -1643,6 +1651,10 @@ video {
 
   .lg\:w-full{
     width: 100%;
+  }
+
+  .lg\:w-\[38px\]{
+    width: 38px;
   }
 
   .lg\:max-w-\[38\%\]{
