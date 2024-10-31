@@ -626,9 +626,11 @@ document.querySelector("#main-container").addEventListener("click", (event) => {
     );
 
     destinationLink.classList.add("active-link");
-    let page = destinationLink.dataset.pagename;
+    let pageName = destinationLink.dataset.pagename;
 
-    generatePage(page);
+    history.pushState({ page: pageName }, "", `#${pageName}`);
+
+    generatePage(pageName);
   }
 });
 
