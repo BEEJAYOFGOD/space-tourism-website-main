@@ -22,7 +22,7 @@
   bottom: 0;
   width: 0%;
   height: 3px;
-  transition: all 0.25s ease-in-out;
+  transition: all 0.5s ease-in-out;
 }
 
 .nav-link:hover::after {
@@ -30,7 +30,7 @@
   height: 3px;
   width: 100%;
   content: "";
-  transition: all 0.3s ease-in-out;
+  transition: all 0.45s ease-in-out;
   transition-delay: 0.2s;
   @apply lg:opacity-100;
 }
