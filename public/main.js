@@ -102,13 +102,16 @@ const loadPageFromHash = () => {
   // After generating the page, show the content
 };
 
-let main = document.querySelector("#main-container");
+function updateActiveClass(elements, index) {
+  elements.forEach((elem) => elem.classList.remove("active"));
+  elements[index].classList.add("active");
+}
 
 window.addEventListener("hashchange", loadPageFromHash);
 window.addEventListener("load", loadPageFromHash);
 
+let main = document.querySelector("#main-container"); // main page content
 let space_data_results;
-
 const homecontent = main.innerHTML;
 const space_section = document.querySelector("#space-section");
 
@@ -174,75 +177,6 @@ function handleDestinationClick() {
     "touchend",
     (event) => {
       handleTouchEnd(event);
-
-      async function handleDestinationGesture() {
-        const changeinX = touchEndX - touchStartX;
-
-        // horizontal swiping for mobile
-
-        if (changeinX > 0 && Math.abs(changeinX) > threshold) {
-          destinationIndex > 0
-            ? (destinationIndex -= 1)
-            : (destinationIndex = destinationLinks.length - 1);
-        } else if (changeinX < 0 && Math.abs(changeinX) > threshold) {
-          destinationIndex < destinationLinks.length - 1
-            ? (destinationIndex += 1)
-            : (destinationIndex = 0);
-        }
-
-        // run the apply the index specific content
-        destinationLinks.forEach((link) => {
-          link.classList.remove("active-link");
-        });
-
-        destinationLinks[destinationIndex].classList.add("active-link");
-
-        const imagePromise = new Promise((resolve) => {
-          const tempImage = new Image();
-          tempImage.onload = () => {
-            destination_image.setAttribute("src", tempImage.src);
-            resolve();
-          };
-
-          tempImage.src = destinationData[destinationIndex].images.webp;
-        });
-
-        destination_image.setAttribute(
-          "alt",
-          `${destinationData[destinationIndex].name} image`
-        );
-
-        await imagePromise;
-
-        // slide in on click fr destination image
-        if (changeinX > 0 && Math.abs(changeinX) > threshold) {
-          destination_image__container.classList.add("slide-in_initial");
-
-          setTimeout(() => {
-            destination_image__container.classList.remove("slide-in_initial");
-          }, animation_duration_off);
-        } else if (changeinX < 0 && Math.abs(changeinX) > threshold) {
-          destination_image__container.classList.add("slide-in_from_right");
-
-          setTimeout(() => {
-            destination_image__container.classList.remove(
-              "slide-in_from_right"
-            );
-          }, animation_duration_off);
-        }
-
-        // apply dynamic content
-        destination_name.textContent = destinationData[destinationIndex].name;
-        destination_description.textContent =
-          destinationData[destinationIndex].description;
-        destination_distance.textContent =
-          destinationData[destinationIndex].distance;
-        destination_travel.textContent =
-          destinationData[destinationIndex].travel;
-
-        // end of code
-      }
-
       handleDestinationGesture();
     },
     false
