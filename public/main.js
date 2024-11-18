@@ -177,6 +177,7 @@ function handleDestinationClick() {
     "touchend",
     (event) => {
       handleTouchEnd(event);
+
       async function handleDestinationGesture() {
         const changeinX = touchEndX - touchStartX;
         // horizontal swiping for mobile
