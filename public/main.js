@@ -143,30 +143,38 @@ let animation_duration = getComputedStyle(document.body).getPropertyValue(
 let animation_duration_off = convertToMilliS(animation_duration);
 
 // Function to handle destination link clicks and update content
+let destinationIndex;
+let destinationLinks;
+let destinationData;
+let destination_image;
+let destination_image__container;
+let destination_name;
+let destination_description;
+let destination_distance;
+let destination_travel;
+
 function handleDestinationClick() {
-  let destinationLinks = document.querySelectorAll(".destination-links");
+  destinationLinks = document.querySelectorAll(".destination-links");
   destinationLinks = Array.from(destinationLinks);
 
-  let destinationData = space_data_results.destinations;
-  let destination_image__container = document.querySelector(
+  destinationData = space_data_results.destinations;
+  destination_image__container = document.querySelector(
     "#destination-img-container"
   );
 
-  let destination_name = document.querySelector("#destination-name");
-  let destination_description = document.querySelector(
-    "#destination-description"
-  );
+  destination_name = document.querySelector("#destination-name");
+  destination_description = document.querySelector("#destination-description");
 
-  let destination_distance = document.querySelector("#destination-distance");
-  let destination_travel = document.querySelector("#destination-travel");
-  let destination_image = document.querySelector("#destination-image");
+  destination_distance = document.querySelector("#destination-distance");
+  destination_travel = document.querySelector("#destination-travel");
+  destination_image = document.querySelector("#destination-image");
 
   setTimeout(() => {
     destination_image__container.classList.remove("slide-in_initial");
   }, animation_duration_off);
 
   //  mobile interactions
-  let destinationIndex = 0;
+  destinationIndex = 0;
   destination_image__container.addEventListener(
     "touchstart",
     handleTouchStart,
@@ -229,23 +237,32 @@ function handleDestinationClick() {
   });
 }
 
+let crewData;
+let tabBtns;
+let crewMemberRole;
+let crewMemberName;
+let crewMemberBio;
+let crewImgContainer;
+let crewMemberImg;
+let crewMemberIndex;
+
 function handleCrewClick() {
   // alert("crew");
   //   alert(space_data_results);
-  let crewData = space_data_results.crew;
-  let tabBtns = Array.from(document.querySelectorAll(".crew-tab-button"));
-  let crewMemberRole = document.querySelector("#crew-member-role");
-  let crewMemberName = document.querySelector("#crew-member-name");
-  let crewMemberBio = document.querySelector("#crew-member-bio");
-  let crewMemberImg = document.querySelector("#crew-member-img");
-  let crewImgContainer = document.querySelector("#crew-img__container");
+  crewData = space_data_results.crew;
+  tabBtns = Array.from(document.querySelectorAll(".crew-tab-button"));
+  crewMemberRole = document.querySelector("#crew-member-role");
+  crewMemberName = document.querySelector("#crew-member-name");
+  crewMemberBio = document.querySelector("#crew-member-bio");
+  crewMemberImg = document.querySelector("#crew-member-img");
+  crewImgContainer = document.querySelector("#crew-img__container");
 
   setTimeout(() => {
     crewImgContainer.classList.remove("slide-in_from_right");
   }, animation_duration_off);
 
   // handle mobile touch gesture
-  let crewMemberIndex = 0;
+  crewMemberIndex = 0;
   crewImgContainer.addEventListener("touchstart", handleTouchStart, false);
   crewImgContainer.addEventListener(
     "touchend",
@@ -298,38 +315,40 @@ function handleCrewClick() {
   });
 }
 
+let technology_tabs;
+let technology_name;
+let technology_description;
+let technology_image_mobile;
+let technology_image_desktop;
+let technology_image_desktop_container;
+let technology_image_mobile_container;
+let technologyIndex;
+let technologyData;
 function handleTechnlogyClick() {
-  let technology_tabs = Array.from(
-    document.querySelectorAll(".technology-tab")
-  );
-  let technology_name = document.querySelector("#technology-name");
-  let technology_description = document.querySelector(
-    "#technology-description"
-  );
-  let technology_image_mobile = document.querySelector(
-    "#technology-image__mobile"
-  );
-  let technology_image_desktop = document.querySelector(
+  technology_tabs = Array.from(document.querySelectorAll(".technology-tab"));
+  technology_name = document.querySelector("#technology-name");
+  technology_description = document.querySelector("#technology-description");
+  technology_image_mobile = document.querySelector("#technology-image__mobile");
+  technology_image_desktop = document.querySelector(
     "#technology-image__desktop"
   );
-  let technology_image_desktop_container = document.querySelector(
+  technology_image_desktop_container = document.querySelector(
     "#technology-image__desktop_conatiner"
   );
-  let technology_image_mobile_container = document.querySelector(
+  technology_image_mobile_container = document.querySelector(
     "#technology-image__mobile_conatiner"
   );
+  technologyIndex = 0;
 
   // fetch spave data from "data.json"
 
-  let technologyData = space_data_results.technology;
+  technologyData = space_data_results.technology;
 
   let slide_duration = getComputedStyle(
     technology_image_desktop_container
   ).getPropertyValue("--slide-duration");
 
   let slide_duration_off = convertToMilliS(slide_duration);
-
-  let technologyIndex = 0;
 
   // alert(slide_duration_off);
   setTimeout(() => {
