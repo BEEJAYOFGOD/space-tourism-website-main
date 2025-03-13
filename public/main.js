@@ -178,61 +178,6 @@ function handleDestinationClick() {
     (event) => {
       handleTouchEnd(event);
 
-      async function handleDestinationGesture() {
-        const changeinX = touchEndX - touchStartX;
-        // horizontal swiping for mobile
-        if (changeinX > 0 && Math.abs(changeinX) > threshold) {
-          destinationIndex > 0
-            ? (destinationIndex -= 1)
-            : (destinationIndex = destinationLinks.length - 1);
-        } else if (changeinX < 0 && Math.abs(changeinX) > threshold) {
-          destinationIndex < destinationLinks.length - 1
-            ? (destinationIndex += 1)
-            : (destinationIndex = 0);
-        }
-        // run the apply the index specific content
-        destinationLinks.forEach((link) => {
-          link.classList.remove("active-link");
-        });
-        destinationLinks[destinationIndex].classList.add("active-link");
-        const imagePromise = new Promise((resolve) => {
-          const tempImage = new Image();
-          tempImage.onload = () => {
-            destination_image.setAttribute("src", tempImage.src);
-            resolve();
-          };
-          tempImage.src = destinationData[destinationIndex].images.webp;
-        });
-        destination_image.setAttribute(
-          "alt",
-          `${destinationData[destinationIndex].name} image`
-        );
-        await imagePromise;
-        // slide in on click fr destination image
-        if (changeinX > 0 && Math.abs(changeinX) > threshold) {
-          destination_image__container.classList.add("slide-in_initial");
-          setTimeout(() => {
-            destination_image__container.classList.remove("slide-in_initial");
-          }, animation_duration_off);
-        } else if (changeinX < 0 && Math.abs(changeinX) > threshold) {
-          destination_image__container.classList.add("slide-in_from_right");
-          setTimeout(() => {
-            destination_image__container.classList.remove(
-              "slide-in_from_right"
-            );
-          }, animation_duration_off);
-        }
-        // apply dynamic content
-        destination_name.textContent = destinationData[destinationIndex].name;
-        destination_description.textContent =
-          destinationData[destinationIndex].description;
-        destination_distance.textContent =
-          destinationData[destinationIndex].distance;
-        destination_travel.textContent =
-          destinationData[destinationIndex].travel;
-        // end of code
-      }
-
       handleDestinationGesture();
     },
     false
@@ -306,58 +251,6 @@ function handleCrewClick() {
     "touchend",
     (event) => {
       handleTouchEnd(event);
-
-      const handleCrewGesture = async () => {
-        const changeinX = touchEndX - touchStartX;
-
-        if (changeinX > 0 && Math.abs(changeinX) > threshold) {
-          crewMemberIndex > 0
-            ? (crewMemberIndex -= 1)
-            : (crewMemberIndex = tabBtns.length - 1);
-        } else if (changeinX < 0 && Math.abs(changeinX) > threshold) {
-          crewMemberIndex < tabBtns.length - 1
-            ? (crewMemberIndex += 1)
-            : (crewMemberIndex = 0);
-        }
-
-        tabBtns.forEach((btn) => btn.classList.remove("active-crew-tab"));
-        tabBtns[crewMemberIndex].classList.add("active-crew-tab");
-
-        crewMemberName.textContent = crewData[crewMemberIndex].name;
-        crewMemberBio.textContent = crewData[crewMemberIndex].bio;
-        crewMemberRole.textContent = crewData[crewMemberIndex].role;
-
-        const imagePromise = new Promise((resolve) => {
-          const tempImage = new Image();
-          tempImage.onload = () => {
-            crewMemberImg.setAttribute("src", tempImage.src);
-            resolve();
-          };
-          tempImage.src = crewData[crewMemberIndex].images.webp;
-        });
-
-        crewMemberImg.setAttribute(
-          "srt",
-          `image of ${crewData[crewMemberIndex].image}`
-        );
-
-        // Wait for image to load before animation
-        await imagePromise;
-
-        if (changeinX > 0 && Math.abs(changeinX) > threshold) {
-          crewImgContainer.classList.add("slide-in_initial");
-
-          setTimeout(() => {
-            crewImgContainer.classList.remove("slide-in_initial");
-          }, animation_duration_off);
-        } else if (changeinX < 0 && Math.abs(changeinX) > threshold) {
-          crewImgContainer.classList.add("slide-in_from_right");
-
-          setTimeout(() => {
-            crewImgContainer.classList.remove("slide-in_from_right");
-          }, animation_duration_off);
-        }
-      };
 
       handleCrewGesture();
     },
@@ -455,67 +348,6 @@ function handleTechnlogyClick() {
 
   technology_image_mobile_container.addEventListener("touchend", (event) => {
     handleTouchEnd(event);
-
-    handleTechnologyGesture = async () => {
-      const changeinX = touchEndX - touchStartX;
-
-      if (changeinX > 0 && Math.abs(changeinX) > threshold) {
-        technologyIndex > 0
-          ? (technologyIndex -= 1)
-          : (technologyIndex = technology_tabs.length - 1);
-      } else if (changeinX < 0 && Math.abs(changeinX) > threshold) {
-        technologyIndex < technology_tabs.length - 1
-          ? (technologyIndex += 1)
-          : (technologyIndex = 0);
-      }
-
-      technology_tabs.forEach((technologyTab) => {
-        technologyTab.classList.remove("active-technology__tab");
-      });
-      technology_tabs[technologyIndex].classList.add("active-technology__tab");
-
-      technology_name.textContent = technologyData[technologyIndex].name;
-      technology_description.textContent =
-        technologyData[technologyIndex].description;
-
-      const imagePromise = new Promise((resolve) => {
-        // Create a temporary image obj
-        const tempImage = new Image();
-        const imageSrc = technologyData[technologyIndex].images.landscape;
-
-        // Set onload handler for the temporary image
-        tempImage.onload = () => {
-          // Set the src attribute of the appropriate image element based on screen size
-          technology_image_mobile.setAttribute("src", tempImage.src);
-          resolve();
-        };
-
-        // Set the src of the temporary image to start loading
-        tempImage.src = imageSrc;
-      });
-
-      // Call the function and wait for the image to load
-      await imagePromise;
-
-      if (changeinX > 0 && Math.abs(changeinX) > threshold) {
-        technology_image_mobile_container.classList.add("slide-in_initial");
-
-        setTimeout(() => {
-          technology_image_mobile_container.classList.remove(
-            "slide-in_initial"
-          );
-        }, animation_duration_off);
-      } else if (changeinX < 0 && Math.abs(changeinX) > threshold) {
-        technology_image_mobile_container.classList.add("slide-in_from_right");
-
-        setTimeout(() => {
-          technology_image_mobile_container.classList.remove(
-            "slide-in_from_right"
-          );
-        }, animation_duration_off);
-      }
-    };
-
     handleTechnologyGesture();
   });
 
@@ -708,3 +540,166 @@ homeBtn.addEventListener("click", () => {
 
   generatePage(pageName);
 });
+
+// This is the function that is reponsible for handling mobile gesture on the Destination page.
+async function handleDestinationGesture() {
+  const changeinX = touchEndX - touchStartX;
+
+  // horizontal swiping for mobile
+  if (changeinX > 0 && Math.abs(changeinX) > threshold) {
+    destinationIndex > 0
+      ? (destinationIndex -= 1)
+      : (destinationIndex = destinationLinks.length - 1);
+  } else if (changeinX < 0 && Math.abs(changeinX) > threshold) {
+    destinationIndex < destinationLinks.length - 1
+      ? (destinationIndex += 1)
+      : (destinationIndex = 0);
+  }
+
+  // run the apply the index specific content
+  destinationLinks.forEach((link) => {
+    link.classList.remove("active-link");
+  });
+
+  destinationLinks[destinationIndex].classList.add("active-link");
+  const imagePromise = new Promise((resolve) => {
+    const tempImage = new Image();
+    tempImage.onload = () => {
+      destination_image.setAttribute("src", tempImage.src);
+      resolve();
+    };
+    tempImage.src = destinationData[destinationIndex].images.webp;
+  });
+  destination_image.setAttribute(
+    "alt",
+    `${destinationData[destinationIndex].name} image`
+  );
+  await imagePromise;
+  // slide in on click fr destination image
+  if (changeinX > 0 && Math.abs(changeinX) > threshold) {
+    destination_image__container.classList.add("slide-in_initial");
+    setTimeout(() => {
+      destination_image__container.classList.remove("slide-in_initial");
+    }, animation_duration_off);
+  } else if (changeinX < 0 && Math.abs(changeinX) > threshold) {
+    destination_image__container.classList.add("slide-in_from_right");
+    setTimeout(() => {
+      destination_image__container.classList.remove("slide-in_from_right");
+    }, animation_duration_off);
+  }
+  // apply dynamic content
+  destination_name.textContent = destinationData[destinationIndex].name;
+  destination_description.textContent =
+    destinationData[destinationIndex].description;
+  destination_distance.textContent = destinationData[destinationIndex].distance;
+  destination_travel.textContent = destinationData[destinationIndex].travel;
+  // end of code
+}
+
+const handleCrewGesture = async () => {
+  const changeinX = touchEndX - touchStartX;
+
+  if (changeinX > 0 && Math.abs(changeinX) > threshold) {
+    crewMemberIndex > 0
+      ? (crewMemberIndex -= 1)
+      : (crewMemberIndex = tabBtns.length - 1);
+  } else if (changeinX < 0 && Math.abs(changeinX) > threshold) {
+    crewMemberIndex < tabBtns.length - 1
+      ? (crewMemberIndex += 1)
+      : (crewMemberIndex = 0);
+  }
+
+  tabBtns.forEach((btn) => btn.classList.remove("active-crew-tab"));
+  tabBtns[crewMemberIndex].classList.add("active-crew-tab");
+
+  crewMemberName.textContent = crewData[crewMemberIndex].name;
+  crewMemberBio.textContent = crewData[crewMemberIndex].bio;
+  crewMemberRole.textContent = crewData[crewMemberIndex].role;
+
+  const imagePromise = new Promise((resolve) => {
+    const tempImage = new Image();
+    tempImage.onload = () => {
+      crewMemberImg.setAttribute("src", tempImage.src);
+      resolve();
+    };
+    tempImage.src = crewData[crewMemberIndex].images.webp;
+  });
+
+  crewMemberImg.setAttribute(
+    "srt",
+    `image of ${crewData[crewMemberIndex].image}`
+  );
+
+  // Wait for image to load before animation
+  await imagePromise;
+
+  if (changeinX > 0 && Math.abs(changeinX) > threshold) {
+    crewImgContainer.classList.add("slide-in_initial");
+
+    setTimeout(() => {
+      crewImgContainer.classList.remove("slide-in_initial");
+    }, animation_duration_off);
+  } else if (changeinX < 0 && Math.abs(changeinX) > threshold) {
+    crewImgContainer.classList.add("slide-in_from_right");
+
+    setTimeout(() => {
+      crewImgContainer.classList.remove("slide-in_from_right");
+    }, animation_duration_off);
+  }
+};
+
+handleTechnologyGesture = async () => {
+  const changeinX = touchEndX - touchStartX;
+
+  if (changeinX > 0 && Math.abs(changeinX) > threshold) {
+    technologyIndex > 0
+      ? (technologyIndex -= 1)
+      : (technologyIndex = technology_tabs.length - 1);
+  } else if (changeinX < 0 && Math.abs(changeinX) > threshold) {
+    technologyIndex < technology_tabs.length - 1
+      ? (technologyIndex += 1)
+      : (technologyIndex = 0);
+  }
+
+  technology_tabs.forEach((technologyTab) => {
+    technologyTab.classList.remove("active-technology__tab");
+  });
+  technology_tabs[technologyIndex].classList.add("active-technology__tab");
+
+  technology_name.textContent = technologyData[technologyIndex].name;
+  technology_description.textContent =
+    technologyData[technologyIndex].description;
+
+  const imagePromise = new Promise((resolve) => {
+    // Create a temporary image obj
+    const tempImage = new Image();
+    const imageSrc = technologyData[technologyIndex].images.landscape;
+
+    // Set onload handler for the temporary image
+    tempImage.onload = () => {
+      // Set the src attribute of the appropriate image element based on screen size
+      technology_image_mobile.setAttribute("src", tempImage.src);
+      resolve();
+    };
+
+    // Set the src of the temporary image to start loading
+    tempImage.src = imageSrc;
+  });
+
+  // Call the function and wait for the image to load
+  await imagePromise;
+
+  if (changeinX > 0 && Math.abs(changeinX) > threshold) {
+    technology_image_mobile_container.classList.add("slide-in_initial");
+
+    setTimeout(() => {
+      technology_image_mobile_container.classList.remove("slide-in_initial");
+    }, animation_duration_off);
+  } else if (changeinX < 0 && Math.abs(changeinX) > threshold) {
+    technology_image_mobile_container.classList.add("slide-in_from_right");
+
+    setTimeout(() => {
+      technology_image_mobile_container.classList.remove("slide-in_from_right");
+    }, animation_duration_off);
+  }
+};

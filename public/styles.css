@@ -834,7 +834,7 @@ video {
   font-size: 18px;
 }
 
-#navbar_ovelay {
+#navbar_overlay {
   opacity: 0;
 }
 
@@ -1520,21 +1520,12 @@ video {
     padding-right: 7rem;
   }
 
-  .md\:px-32{
-    padding-left: 8rem;
-    padding-right: 8rem;
-  }
-
   .md\:pr-0{
     padding-right: 0px;
   }
 
   .md\:pt-0{
     padding-top: 0px;
-  }
-
-  .md\:text-left{
-    text-align: left;
   }
 
   .md\:text-3xl{
