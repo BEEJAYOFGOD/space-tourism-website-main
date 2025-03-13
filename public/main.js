@@ -480,7 +480,7 @@ const changePageBackground = (page) => {
 let closeBtn = document.querySelector("#close-button");
 let hamBurger = document.querySelector("#hamburger");
 let navbar = document.querySelector("#nav");
-let navOverlay = document.querySelector("#navbar_ovelay");
+let navOverlay = document.querySelector("#navbar_overlay");
 
 hamBurger.addEventListener("click", () => {
   navbar.classList.add("slide-in_from_right");
@@ -490,6 +490,7 @@ hamBurger.addEventListener("click", () => {
 });
 
 navOverlay.addEventListener("click", () => {
+
   if (navbar.classList.contains("flex")) {
     navOverlay.classList.replace("flex", "hidden");
     navbar.classList.remove("slide-in_from_right");
@@ -505,6 +506,7 @@ navOverlay.addEventListener("click", () => {
 
 closeBtn.addEventListener("click", () => {
   // hide navbar
+
   navbar.classList.add("slide-out");
   navOverlay.classList.replace("flex", "hidden");
 
