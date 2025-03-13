@@ -490,7 +490,6 @@ hamBurger.addEventListener("click", () => {
 });
 
 navOverlay.addEventListener("click", () => {
-
   if (navbar.classList.contains("flex")) {
     navOverlay.classList.replace("flex", "hidden");
     navbar.classList.remove("slide-in_from_right");
