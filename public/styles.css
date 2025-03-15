@@ -561,8 +561,15 @@ video {
 }
 
 .span-link{
+  margin-left: 0.5rem;
   margin-right: 0.5rem;
   font-weight: 600;
+}
+
+@media (min-width: 768px){
+  .span-link{
+    margin-right: 0.75rem;
+  }
 }
 
 .nav-link{
@@ -602,8 +609,18 @@ video {
   content: "";
   background: white;
   display: block;
-  width: 100%;
-  height: 3px;
+  height: 100%;
+  width: 2%;
+}
+
+@media (min-width: 768px){
+  .active-link::after{
+    height: 3px;
+    width: 100%;
+  }
+}
+
+.active-link::after {
   position: absolute;
   bottom: 0;
   opacity: 1;

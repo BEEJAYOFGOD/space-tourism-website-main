@@ -323,7 +323,6 @@ let technology_image_desktop;
 let technology_image_desktop_container;
 let technology_image_mobile_container;
 let technologyIndex;
-let technologyData;
 function handleTechnlogyClick() {
   technology_tabs = Array.from(document.querySelectorAll(".technology-tab"));
   technology_name = document.querySelector("#technology-name");
@@ -349,6 +348,8 @@ function handleTechnlogyClick() {
   ).getPropertyValue("--slide-duration");
 
   let slide_duration_off = convertToMilliS(slide_duration);
+
+ 
 
   // alert(slide_duration_off);
   setTimeout(() => {
