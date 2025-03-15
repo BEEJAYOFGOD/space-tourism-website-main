@@ -607,7 +607,7 @@ video {
   }
 }
 
-.active-link::after {
+.active-link.nav-link::after {
   content: "";
   background: white;
   display: block;
@@ -616,16 +616,21 @@ video {
 }
 
 @media (min-width: 768px){
-  .active-link::after{
+  .active-link.nav-link::after{
     height: 3px;
     width: 100%;
   }
 }
 
-.active-link::after {
+.active-link.nav-link::after {
   position: absolute;
   bottom: 0;
   opacity: 1;
+}
+
+.destination-links.active-link::after{
+  height: 3px;
+  width: 100%;
 }
 
 #destination-image.animate-spin {

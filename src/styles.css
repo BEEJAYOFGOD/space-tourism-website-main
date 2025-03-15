@@ -22,7 +22,9 @@
   @apply  md:after:w-full md:after:h-[3px] md:after:bg-white md:after:opacity-100 md:after:transition-all md:after:duration-[450ms] md:after:ease-in-out md:after:delay-[200ms];
 }
 
-.active-link::after {
+
+
+.active-link.nav-link::after {
   content: "";
   background: white;
   display: block;
@@ -35,6 +37,11 @@
   opacity: 1;
  
 }
+
+.destination-links.active-link::after {
+  @apply h-[3px] w-full ;
+}
+
 
 #destination-image.animate-spin {
   animation-duration: 50s !important;
