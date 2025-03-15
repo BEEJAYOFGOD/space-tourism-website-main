@@ -592,17 +592,19 @@ video {
   content: var(--tw-content);
 }
 
-.nav-link:hover::after::after{
-  height: 3px;
-  width: 100%;
-  --tw-bg-opacity: 1;
-  background-color: rgb(255 255 255 / var(--tw-bg-opacity));
-  opacity: 1;
-  transition-property: all;
-  transition-delay: 200ms;
-  transition-duration: 450ms;
-  content: var(--tw-content);
-  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+@media (min-width: 768px){
+  .nav-link:hover::after{
+    height: 3px;
+    width: 100%;
+    --tw-bg-opacity: 1;
+    background-color: rgb(255 255 255 / var(--tw-bg-opacity));
+    opacity: 1;
+    transition-property: all;
+    transition-delay: 200ms;
+    transition-duration: 450ms;
+    content: var(--tw-content);
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  }
 }
 
 .active-link::after {

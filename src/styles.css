@@ -18,8 +18,8 @@
   @apply relative after:content-[''] after:absolute after:bottom-0 after:w-0 after:h-[3px] after:opacity-0 after:transition-all after:duration-500 after:ease-in-out;
 }
 
-.nav-link:hover::after {
-  @apply after:w-full after:h-[3px] after:bg-white after:opacity-100 after:transition-all after:duration-[450ms] after:ease-in-out after:delay-[200ms];
+.nav-link:hover {
+  @apply  md:after:w-full md:after:h-[3px] md:after:bg-white md:after:opacity-100 md:after:transition-all md:after:duration-[450ms] md:after:ease-in-out md:after:delay-[200ms];
 }
 
 .active-link::after {
